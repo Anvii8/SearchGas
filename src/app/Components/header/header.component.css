@@ -1,0 +1,41 @@
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(219, 191, 135);    
+    padding: 1rem;
+}
+
+.navbar-brand{
+    padding: 0;
+}
+
+.logo {
+    max-width: 20%;
+    height: auto;
+}
+
+.header__nav--list{
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.header__nav--list li a {
+    text-decoration: none;
+    color: black;
+}
+
+.header__nav--list li a:hover {
+    color: white
+}
+
+.button_user{
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    margin-top: -10px;  
+}

@@ -1,0 +1,23 @@
+<header>
+    <a href="/">
+        <img src=".\assets\images\Logo.png" alt="Logo de la web" class="logo">
+    </a>
+    <nav>
+        <ul class="header__nav--list">
+            <li><a id="info" href="#">Información sobre Search Gas</a></li>
+            <li>
+                <button class="button_user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" aria-hidden="false">
+                    <mat-icon aria-hidden="false" fontIcon="account_circle"></mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <span>Iniciar Sesión</span>
+                    </button>
+                    <button mat-menu-item>
+                      <span>Registrarse</span>
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+    </nav>
+</header>

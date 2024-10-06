@@ -1,0 +1,12 @@
+
+<form class="search_form">
+    <mat-form-field class="search_form_field">
+        <mat-label>Inserte una ubicación</mat-label>
+        <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell">
+        <mat-error *ngIf="locationFormControl.hasError('required')">Por favor, inserte una ubicación</mat-error>
+    </mat-form-field>
+    <button class="search_button" mat-stroked-button color="primary" [disabled]="locationFormControl.invalid" (click)="onSubmit()">
+        Buscar
+    </button>
+</form>
+

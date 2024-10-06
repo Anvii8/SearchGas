@@ -1,1 +1,9 @@
-<p>gas-station-list works!</p>
+<div>
+    <ul>
+        <li *ngFor="let gasStation of gasStations">
+            <h2>Gasolineras en {{ gasStation.localidad }}</h2>
+        {{ gasStation.marca }} - {{ gasStation.direccion }} - Precio gasolina 95: {{ gasStation.preciogasolina95 }}
+        </li>
+    </ul>
+</div>
+  

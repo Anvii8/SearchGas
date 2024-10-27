@@ -5,9 +5,8 @@ import { GasStationListComponent } from './Components/gas-station-list/gas-stati
 import { HomeComponent } from './Components/home/home.component';
 
 const routes: Routes = [
-  {
-    path: '', component: HomeComponent
-  }
+  { path: '', component: HomeComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

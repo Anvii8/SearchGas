@@ -1,0 +1,18 @@
+.home__footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 2rem;
+}
+
+.footer_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+
+    a{
+        color: white;
+    }
+}

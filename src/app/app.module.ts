@@ -16,6 +16,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { HeaderComponent } from './Components/header/header.component';
 import {MatButtonModule} from '@angular/material/button';
+import { FooterComponent } from './Components/footer/footer.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { RegisterComponent } from './Components/register/register.component';
 
 
 @NgModule({
@@ -25,7 +29,9 @@ import {MatButtonModule} from '@angular/material/button';
     GasStationListComponent,
     SearchFieldComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

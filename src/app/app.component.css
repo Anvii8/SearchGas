@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    height: 100vh;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+main{
+    flex: 1;
+}

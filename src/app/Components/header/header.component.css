@@ -1,5 +1,4 @@
-
-header{
+.infoHeader{
     display: flex;
     justify-content: space-between;
     background-color: rgb(219, 191, 135);    

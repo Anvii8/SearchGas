@@ -1,4 +1,4 @@
-<header>
+<div class="infoHeader">
     <a href="/">
         <img src=".\assets\images\Logo.png" alt="Logo de la web" class="logo">
     </a>
@@ -9,14 +9,10 @@
                     <mat-icon class="userIcon" aria-hidden="false" fontIcon="account_circle"></mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                      <span>Iniciar Sesión</span>
-                    </button>
-                    <button mat-menu-item>
-                      <span>Registrarse</span>
-                    </button>
+                    <button (click)="login()" mat-menu-item>Iniciar Sesión</button>
+                    <button (click)="register()"mat-menu-item>Registrarse</button>
                 </mat-menu>
             </li>
         </ul>
     </nav>
-</header>
+</div>

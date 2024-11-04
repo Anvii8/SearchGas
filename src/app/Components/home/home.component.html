@@ -1,14 +1,10 @@
 <body>
 
-    <app-header></app-header>
-
     <main class="container">
         <h1 class="title">Search Gas</h1>
         <app-search-field (locationSelected)="locationSelected($event)"></app-search-field>
         <app-gas-station-list [location]="location"></app-gas-station-list>
     </main>
-
-    <app-footer></app-footer>
 
 </body>
 

@@ -20,6 +20,11 @@ import { FooterComponent } from './Components/footer/footer.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { RegisterComponent } from './Components/register/register.component';
+import { MapComponent } from './Components/map/map.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NotificationDialogComponent } from './Components/notification-dialog/notification-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -31,7 +36,9 @@ import { RegisterComponent } from './Components/register/register.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterComponent
+    RegisterComponent,
+    MapComponent,
+    NotificationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,9 @@ import { RegisterComponent } from './Components/register/register.component';
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

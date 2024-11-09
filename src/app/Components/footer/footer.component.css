@@ -5,8 +5,8 @@
     background-color: black;
     color: white;
     padding: 2rem;
+}
 
-    a{
-        color: white;
-    }
+.enlace-footer{
+    color: white;
 }

@@ -1,15 +1,31 @@
 <div class="infoHeader">
-
     <a href="/">
-        <img src=".\assets\images\Logo.png" alt="Logo de la web" class="logo">
+        <img src="./assets/images/Logo.png" alt="Logo de la web" class="logo">
     </a>
 
-    <button class="button_user" mat-icon-button [matMenuTriggerFor]="menu" aria-hidden="false">
-        <mat-icon class="userIcon" aria-hidden="false" fontIcon="account_circle"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button (click)="login()" mat-menu-item>Iniciar Sesión</button>
-        <button (click)="register()"mat-menu-item>Registrarse</button>
-    </mat-menu>
+    <ng-container *ngIf="showNoAuthSection">
+        <button class="button_user" mat-icon-button [matMenuTriggerFor]="authMenu" aria-hidden="false">
+            <mat-icon class="userIcon" aria-hidden="false" fontIcon="account_circle"></mat-icon>
+        </button>
+        <mat-menu #authMenu="matMenu">
+            <button (click)="login()" mat-menu-item>Iniciar Sesión</button>
+            <button (click)="register()" mat-menu-item>Registrarse</button>
+        </mat-menu>
+    </ng-container>
 
+    <ng-container *ngIf="showAuthSection">
+        <div class="infoHeaderUser">
+            <p class="userName">Hola, {{ userName }}</p>
+            <button (click)="favorites()" class="button_user" mat-icon-button aria-hidden="false">
+                <mat-icon class="favoritesIcon" fontIcon="favorite"></mat-icon>
+            </button>
+            <button class="button_user" mat-icon-button [matMenuTriggerFor]="authMenu" aria-hidden="false">
+                <mat-icon class="userIcon" fontIcon="account_circle"></mat-icon>
+            </button>
+            <mat-menu #authMenu="matMenu">
+                <button (click)="favorites()" mat-menu-item>Gasolineras Favoritas</button>
+                <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
+            </mat-menu>
+        </div>
+    </ng-container>
 </div>

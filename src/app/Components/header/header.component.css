@@ -23,3 +23,22 @@
     width: auto;
     height: auto;
 }
+
+.infoHeaderUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.userName{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.favoritesIcon{
+    font-size: 30px;
+    width: auto;
+    height: auto;
+}

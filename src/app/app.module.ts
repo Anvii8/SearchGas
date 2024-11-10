@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +23,8 @@ import { MapComponent } from './Components/map/map.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationDialogComponent } from './Components/notification-dialog/notification-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FavoritesComponent } from './Components/favorites/favorites.component';
+import { GasStationDetailsComponent } from './Components/gas-station-details/gas-station-details.component';
 
 
 
@@ -38,7 +39,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     FooterComponent,
     RegisterComponent,
     MapComponent,
-    NotificationDialogComponent
+    NotificationDialogComponent,
+    FavoritesComponent,
+    GasStationDetailsComponent
   ],
   imports: [
     BrowserModule,

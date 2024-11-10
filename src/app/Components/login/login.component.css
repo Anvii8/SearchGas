@@ -1,0 +1,32 @@
+.title{
+    font-size: 56px;
+    margin-bottom: 30px;
+}
+
+.container-uoc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+mat-form-field{
+    width: 100%;
+}
+  
+.mat-error {
+    width: 250px;
+}
+  
+.button{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button button {
+    width: 100%;
+    background-color: #FF7A00;
+    margin-top: 15px;
+    height: 48px;
+}

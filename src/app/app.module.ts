@@ -25,6 +25,7 @@ import { NotificationDialogComponent } from './Components/notification-dialog/no
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FavoritesComponent } from './Components/favorites/favorites.component';
 import { GasStationDetailsComponent } from './Components/gas-station-details/gas-station-details.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -58,7 +59,8 @@ import { GasStationDetailsComponent } from './Components/gas-station-details/gas
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

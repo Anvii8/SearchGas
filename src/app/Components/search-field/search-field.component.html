@@ -1,4 +1,4 @@
-<form class="search_form">
+<form class="search_form" *ngIf="showNoAuthSection">
     <mat-form-field class="search_form_field">
         <mat-label>Inserte una población</mat-label>
         <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell">
@@ -7,4 +7,51 @@
     <button class="search_button" mat-stroked-button color="primary" [disabled]="locationFormControl.invalid" (click)="onSubmit()">
         Buscar
     </button>
+</form>
+
+<form [formGroup]="searchForm" class="search_form2" *ngIf="showAuthSection">
+    <div class="row">
+        <mat-form-field class="search_form_field">
+            <mat-label>Inserte una población</mat-label>
+            <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell">
+            <mat-error *ngIf="locationFormControl.hasError('required')">Por favor, inserte una población</mat-error>
+        </mat-form-field>
+        
+        <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.invalid" (click)="onSubmit()">
+            Buscar
+        </button>
+    </div>
+
+    <h2>Seleccione un tipo de combustible</h2>
+    <div class="row">
+        <div class="fuel-select">
+            <h4>Diesel</h4>
+            <mat-form-field>
+                <mat-label>Diesel</mat-label>
+                <mat-select formControlName="dieselControl">
+                    <mat-option>--</mat-option>
+                    <div *ngFor="let diesel of typesDiesel">
+                        <mat-option [value]="diesel">{{ diesel }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fuel-select">
+            <h4>Gasolina</h4>
+            <mat-form-field>
+                <mat-label>Gasolina</mat-label>
+                <mat-select formControlName="gasControl">
+                    <mat-option>--</mat-option>
+                    <div *ngFor="let gasolina of typesGas">
+                        <mat-option [value]="gasolina">{{ gasolina }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <mat-error *ngIf="searchForm.hasError('atLeastOneRequired')">
+        Por favor, seleccione al menos un tipo de combustible.
+    </mat-error>
 </form>

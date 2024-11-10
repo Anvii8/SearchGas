@@ -10,11 +10,16 @@ import { GasStationDTO } from 'src/app/Models/gas-station.dto';
 export class HomeComponent {
 
   location!: string;
+  fuel!: string[];
   @ViewChild('map') mapComponent!: MapComponent;
   gasStations: GasStationDTO[] = [];
 
   locationSelected(location:string): void{
     this.location = location;
+  }
+
+  FuelSelected(fuel:string[]): void{
+    this.fuel = fuel;
   }
 
   gasStationsListReceived(gasStations: GasStationDTO[]): void {

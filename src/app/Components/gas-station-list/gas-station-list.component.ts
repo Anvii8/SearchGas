@@ -15,18 +15,20 @@ export class GasStationListComponent {
   isLoading: boolean = false;
 
   @Input() location!: string;
+  @Input() fuel!: string[];
   @Output() gasStationsListReceived = new EventEmitter<GasStationDTO[]>();
 
   constructor(private gasStationService: GasStationService){}
-/*
-  ngOnInit(): void {
-    this.getGasStationsbyLocation('Martorell');
-  }*/
 
   ngOnChanges() {
     if (this.location) {
       this.location = this.formatLocation(this.location);
-      this.getGasStationsbyLocation(this.location);
+      if(this.location && this.fuel){
+        this.getGasStationsByLocationAndFuel(this.location, this.fuel);
+      }
+      else{
+        this.getGasStationsbyLocation(this.location);
+      }
     }
   }
 
@@ -64,12 +66,49 @@ export class GasStationListComponent {
   }
 
   getFuelPrices(gasStation: GasStationDTO) {
+    if(this.fuel){
+      return [
+        { type: 'Diesel', price: gasStation.preciodiesel },
+        { type: 'Diesel Premium', price: gasStation.preciodieselpremium },
+        { type: 'Gasolina 95', price: gasStation.preciogasolina95 },
+        { type: 'Gasolina 98', price: gasStation.preciogasolina98 }
+    ].filter(fuel => this.fuel.includes(fuel.type) && fuel.price != 0.000);
+    }
     return [
         { type: 'Diesel', price: gasStation.preciodiesel },
         { type: 'Diesel Premium', price: gasStation.preciodieselpremium },
         { type: 'Gasolina 95', price: gasStation.preciogasolina95 },
         { type: 'Gasolina 98', price: gasStation.preciogasolina98 }
     ].filter(fuel => fuel.price != 0.000);
+  }
+
+  getGasStationsByLocationAndFuel(location: string, fuel: string[]): void{
+    this.isLoading = true;
+    this.gasStationService.getGasStationByLocationAndFuel(location, fuel).subscribe(
+      (data) => {
+        this.isSearched = true;
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
+        
+        if(data.length === 0){
+          this.message = 'No se han encontrado gasolineras en esta población. Por favor, prueba con otra población y/o seleccione otro tipo de combustible.';
+          this.gasStations = [];
+          this.gasStationsListReceived.emit(this.gasStations);
+        }
+        else{
+          this.gasStations = data;
+          this.gasStationsListReceived.emit(this.gasStations);
+          this.message = '';
+        }
+      },
+      (error) => {
+        console.error('Error al obtener las gasolineras de la población', error);
+        this.message = 'Hubo un error al obtener las gasolineras. Por favor, inténtalo de nuevo más tarde.';
+        this.isLoading = false;
+      }
+    )
   }
 
 }

@@ -21,7 +21,6 @@
                     </mat-card-title-group>
                 </mat-card-header>
                 <mat-card-content class="station-content">
-
                         <div class="station-column1">
                             <p>{{ gasStation.direccion }}</p>
                             <p>{{ gasStation.localidad }}</p>
@@ -29,7 +28,7 @@
                         </div>
 
                         <hr class="divider">
-
+                        
                         <div class="station-column2">
                             <div *ngFor="let fuel of getFuelPrices(gasStation)">
                                 <p class="fuel-type">{{ fuel.type }}</p>
@@ -40,7 +39,6 @@
                                 <p>{{ gasStation.fechadatos }}</p>
                             </div>
                         </div>
-
                 </mat-card-content>
             </mat-card>
         

@@ -15,8 +15,8 @@ export class AuthService {
   private urlAuthApi: string;
 
   constructor(private http: HttpClient) {
-    this.urlAuthApi = 'http://localhost:3000/auth';  // Entorno de desarrollo
-    // this.urlAuthApi = 'https://searchgasbe.onrender.com/users';  // Entorno de producción
+    //this.urlAuthApi = 'http://localhost:3000/auth';  // Entorno de desarrollo
+    this.urlAuthApi = 'https://searchgasbe.onrender.com/auth';  // Entorno de producción
   }
 
   login(email: string, password: string): Observable<AuthToken> {

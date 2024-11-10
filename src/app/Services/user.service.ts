@@ -12,8 +12,8 @@ export class UserService {
   private urlUsersApi: string;
 
   constructor(private http: HttpClient) {
-    this.urlUsersApi = 'http://localhost:3000/users';  // Entorno de desarrollo
-    // this.urlUsersApi = 'https://searchgasbe.onrender.com/users';  // Entorno de producción
+    //this.urlUsersApi = 'http://localhost:3000/users';  // Entorno de desarrollo
+    this.urlUsersApi = 'https://searchgasbe.onrender.com/users';  // Entorno de producción
   }
 
   register(user: UserDTO): Observable<UserDTO> {    

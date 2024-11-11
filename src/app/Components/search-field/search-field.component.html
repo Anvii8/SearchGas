@@ -2,9 +2,9 @@
     <mat-form-field class="search_form_field">
         <mat-label>Inserte una población</mat-label>
         <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell">
-        <mat-error *ngIf="locationFormControl.hasError('required')">Por favor, inserte una población</mat-error>
+        <mat-error *ngIf="searchForm.hasError('locationNeeded')">Por favor, inserte una población</mat-error>
     </mat-form-field>
-    <button class="search_button" mat-stroked-button color="primary" [disabled]="locationFormControl.invalid" (click)="onSubmit()">
+    <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.hasError('locationNeeded')" (click)="onSubmit()">
         Buscar
     </button>
 </form>
@@ -14,13 +14,21 @@
         <mat-form-field class="search_form_field">
             <mat-label>Inserte una población</mat-label>
             <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell">
-            <mat-error *ngIf="locationFormControl.hasError('required')">Por favor, inserte una población</mat-error>
         </mat-form-field>
-        
+        <button (click)="geolocation()" class="button_geolocation"  matTooltip="La ubicación puede no ser precisa" mat-icon-button aria-hidden="false" [ngClass]="{ 'highlighted': geoAccepted }">
+            <mat-icon class="locationIcon" fontIcon="my_location"></mat-icon>
+        </button>
         <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.invalid" (click)="onSubmit()">
             Buscar
         </button>
     </div>
+    <mat-error *ngIf="searchForm.hasError('atLeastOneSelectedLocation')">
+        Por favor, inserte una población o escoja la opción de geolocalización.
+    </mat-error>
+    <mat-error *ngIf="searchForm.hasError('bothSelectedLocation')">
+        No puede escoger las dos opciones a la vez. 
+    </mat-error>
+
 
     <h2>Seleccione un tipo de combustible</h2>
     <div class="row">

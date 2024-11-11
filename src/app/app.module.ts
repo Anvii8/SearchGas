@@ -26,6 +26,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FavoritesComponent } from './Components/favorites/favorites.component';
 import { GasStationDetailsComponent } from './Components/gas-station-details/gas-station-details.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -60,7 +61,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

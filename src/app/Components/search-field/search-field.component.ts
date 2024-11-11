@@ -9,15 +9,18 @@ import { HeaderViewService } from 'src/app/Services/header-view.service';
   styleUrls: ['./search-field.component.css'],
 })
 export class SearchFieldComponent implements OnInit{
-  locationFormControl = new FormControl('', [Validators.required]);
+  locationFormControl = new FormControl('');
   dieselControl = new FormControl('');
   gasControl = new FormControl('');
 
   showAuthSection: boolean;
   showNoAuthSection: boolean;
+  geoAccepted: boolean;
+  geolocationUser: [number, number] = [0, 0];
 
   @Output() locationSelected = new EventEmitter<string>();
   @Output() fuelSelected = new EventEmitter<string[]>();
+  @Output() geolocationSelected = new EventEmitter<[number, number]>();
 
   typesDiesel: string[] = ["Diesel", "Diesel Premium"];
   typesGas: string[] = ["Gasolina 95", "Gasolina 98"];
@@ -28,12 +31,13 @@ export class SearchFieldComponent implements OnInit{
         dieselControl: this.dieselControl,
         gasControl: this.gasControl
     },
-    { validators: this.atLeastOneSelected }
+    { validators: [this.atLeastOneSelected, this.atLeastOneSelectedLocation.bind(this)] }
 );
   
   constructor(private headerMenusService: HeaderViewService){
     this.showAuthSection = false;
     this.showNoAuthSection = true;
+    this.geoAccepted = false;
   }
 
   ngOnInit(): void {
@@ -42,6 +46,7 @@ export class SearchFieldComponent implements OnInit{
         if (headerInfo) {
           this.showAuthSection = headerInfo.showAuthSection;
           this.showNoAuthSection = headerInfo.showNoAuthSection;
+          this.searchForm.updateValueAndValidity();
         }
       }
     );
@@ -50,11 +55,16 @@ export class SearchFieldComponent implements OnInit{
   onSubmit() {
     if(this.showAuthSection){
       if (this.searchForm.valid) {
-        const location = this.locationFormControl.value;
         const diesel = this.dieselControl.value;
         const gas = this.gasControl.value;
         const fuel = [diesel, gas].filter((value): value is string => value !== null && value !== undefined);
-        this.locationSelected.emit(location!);
+        if(this.geoAccepted){
+          this.geolocationSelected.emit(this.geolocationUser);
+        }
+        else{
+          const location = this.locationFormControl.value;
+          this.locationSelected.emit(location!);
+        }
         this.fuelSelected.emit(fuel);
       } else {
         this.searchForm.markAllAsTouched();
@@ -75,5 +85,43 @@ export class SearchFieldComponent implements OnInit{
         return { atLeastOneRequired: true };
     }
     return null;
+  }
+
+  private atLeastOneSelectedLocation(control: AbstractControl): ValidationErrors | null {
+    const loc = control.get('locationFormControl')?.value;
+
+    if (this.showAuthSection) {
+      if (!loc && !this.geoAccepted) {
+        return { atLeastOneSelectedLocation: true };
+      }
+      else if(loc && this.geoAccepted){
+        return { bothSelectedLocation: true };
+      }
+    } else {
+      if (!loc) {
+        return { locationNeeded: true };
+      }
+    }
+    return null;
+  }
+
+  geolocation(): void {
+    this.geoAccepted = !this.geoAccepted;
+    if (this.geoAccepted) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.geolocationUser = [position.coords.latitude, position.coords.longitude];
+          this.searchForm.updateValueAndValidity();
+        },
+        (error) => {
+          this.geoAccepted = false;
+          console.error('No se ha podido geolocalizar al usuario', error);
+          this.searchForm.updateValueAndValidity();
+        }
+      );
+    } else {
+      this.geolocationUser = [0, 0];
+      this.searchForm.updateValueAndValidity();
+    }
   }
 }

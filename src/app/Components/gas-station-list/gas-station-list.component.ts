@@ -13,6 +13,7 @@ export class GasStationListComponent {
   isSearched: boolean = false;
   message: string = '';
   isLoading: boolean = false;
+  locationIndication: boolean = false;
 
   @Input() location!: string;
   @Input() fuel!: string[];
@@ -33,6 +34,7 @@ export class GasStationListComponent {
   }
 
   getGasStationsbyLocation(location: string): void{
+    this.locationIndication = true;
     this.isLoading = true;
     this.gasStationService.getGasStationByLocation(location).subscribe(
       (data) => {
@@ -43,7 +45,7 @@ export class GasStationListComponent {
         }, 500);
         
         if(data.length === 0){
-          this.message = 'No se han encontrado gasolineras en esta población. Por favor, prueba con otra población.';
+          this.message = 'No se han encontrado gasolineras en esta población. Por favor, pruebe con otra población.';
           this.gasStations = [];
           this.gasStationsListReceived.emit(this.gasStations);
         }
@@ -66,14 +68,6 @@ export class GasStationListComponent {
   }
 
   getFuelPrices(gasStation: GasStationDTO) {
-    if(this.fuel){
-      return [
-        { type: 'Diesel', price: gasStation.preciodiesel },
-        { type: 'Diesel Premium', price: gasStation.preciodieselpremium },
-        { type: 'Gasolina 95', price: gasStation.preciogasolina95 },
-        { type: 'Gasolina 98', price: gasStation.preciogasolina98 }
-    ].filter(fuel => this.fuel.includes(fuel.type) && fuel.price != 0.000);
-    }
     return [
         { type: 'Diesel', price: gasStation.preciodiesel },
         { type: 'Diesel Premium', price: gasStation.preciodieselpremium },
@@ -83,6 +77,7 @@ export class GasStationListComponent {
   }
 
   getGasStationsByLocationAndFuel(location: string, fuel: string[]): void{
+    this.locationIndication = true;
     this.isLoading = true;
     this.gasStationService.getGasStationByLocationAndFuel(location, fuel).subscribe(
       (data) => {
@@ -93,7 +88,7 @@ export class GasStationListComponent {
         }, 500);
         
         if(data.length === 0){
-          this.message = 'No se han encontrado gasolineras en esta población. Por favor, prueba con otra población y/o seleccione otro tipo de combustible.';
+          this.message = 'No se han encontrado gasolineras en esta población. Por favor, pruebe con otra población y/o seleccione otro tipo de combustible.';
           this.gasStations = [];
           this.gasStationsListReceived.emit(this.gasStations);
         }

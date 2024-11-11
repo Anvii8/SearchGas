@@ -1,4 +1,5 @@
 <div *ngIf="message" class="errorMessage">
+    <h2 *ngIf="locationIndication">Se ha intentado buscar gasolineras cercanas a {{ location }}</h2>
     <mat-icon>error_outline</mat-icon>
     {{ message }}
 </div>

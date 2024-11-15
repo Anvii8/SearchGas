@@ -1,1 +1,40 @@
-<p>gas-station-details works!</p>
+<div class="container mt-5">
+    <div id="map2" class="map"></div>
+
+    <div *ngIf="gasStation">
+        <mat-tab-group>
+            <!-- Información General -->
+            <mat-tab label="Información General">
+                <div class="p-3">
+                    <p><strong>Marca:</strong> {{ gasStation.marca }}</p>
+                    <p><strong>Localidad:</strong> {{ gasStation.localidad }}</p>
+                    <p><strong>Dirección:</strong> {{ gasStation.direccion }}</p>
+                    <p><strong>Horario:</strong> {{ gasStation.horario }}</p>
+                </div>
+            </mat-tab>
+
+            <!-- Ubicación -->
+            <mat-tab label="Ubicación">
+                <div class="p-3">
+                    <p><strong>Longitud:</strong> {{ gasStation.longitud }}</p>
+                    <p><strong>Latitud:</strong> {{ gasStation.latitud }}</p>
+                    <p><strong>Última Actualización:</strong> {{ gasStation.fechadatos }}</p>
+                </div>
+            </mat-tab>
+
+            <!-- Precios de Combustible -->
+            <mat-tab label="Precios de Combustible">
+                <div class="p-3">
+                    <p><strong>Gasolina 95:</strong> {{ gasStation.preciogasolina95 }} €/L</p>
+                    <p><strong>Gasolina 98:</strong> {{ gasStation.preciogasolina98 }} €/L</p>
+                    <p><strong>Diesel:</strong> {{ gasStation.preciodiesel }} €/L</p>
+                    <p><strong>Diesel Premium:</strong> {{ gasStation.preciodieselpremium }} €/L</p>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        <div class="text-end mt-3">
+            <a class="btn btn-danger" routerLink="/">Volver</a>
+        </div>
+    </div>
+</div>

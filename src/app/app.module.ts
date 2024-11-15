@@ -27,6 +27,8 @@ import { FavoritesComponent } from './Components/favorites/favorites.component';
 import { GasStationDetailsComponent } from './Components/gas-station-details/gas-station-details.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -62,7 +64,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

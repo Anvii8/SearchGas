@@ -3,3 +3,9 @@
     height: 530px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 400px){
+    .map{
+        width: 360px;
+    }
+}

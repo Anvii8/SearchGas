@@ -9,7 +9,10 @@
 </div>
 
 <div *ngIf="!message && !isLoading">
-    <h2 *ngIf="isSearched">Gasolineras en {{ location }}</h2>
+    <h2 *ngIf="isSearched">
+        Gasolineras en {{ location }}
+        <mat-icon *ngIf="isAuthenticated" matTooltip="Puede ordenar los resultados acercando el ratón a las columnas que indican el tipo de combustible, distancia y tiempo estimado." fontIcon="info"></mat-icon>
+    </h2>
   
     <table mat-table [dataSource]="gasStations" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
         <!-- Columna Marca -->
@@ -51,6 +54,22 @@
                     </td>
                 </ng-container>
             </ng-container>
+
+            <!-- Columna Distancia en Km -->
+            <ng-container matColumnDef="distance">
+                <th mat-sort-header="distance" mat-header-cell *matHeaderCellDef> Distancia (km) </th>
+                <td mat-cell *matCellDef="let gasStation">
+                {{ gasStation.distance | number: '1.2-2' }}
+                </td>
+            </ng-container>
+
+            <!-- Columna Tiempo Distancia -->
+            <ng-container matColumnDef="travelTime">
+                <th mat-sort-header="travelTime" mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
+                <td mat-cell *matCellDef="let gasStation">
+                {{ gasStation.travelTime | number: '1.2-2' }}
+                </td>
+            </ng-container>
         </ng-container>
 
         <ng-container *ngIf="!isAuthenticated">
@@ -85,6 +104,22 @@
                     {{ gasStation.preciogasolina98 != 0.000 ? gasStation.preciogasolina98 : '-' }}
                 </td>
             </ng-container>
+
+            <!-- Columna Distancia en Km -->
+            <ng-container matColumnDef="distance">
+                <th mat-sort-header="travelTime" mat-header-cell *matHeaderCellDef> Distancia (km) </th>
+                <td mat-cell *matCellDef="let gasStation">
+                {{ gasStation.distance | number: '1.2-2' }}
+                </td>
+            </ng-container>
+
+            <!-- Columna Tiempo Distancia -->
+            <ng-container matColumnDef="travelTime">
+                <th mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
+                <td mat-cell *matCellDef="let gasStation">
+                {{ gasStation.travelTime | number: '1.2-2' }}
+                </td>
+            </ng-container>
         </ng-container>
 
         <!-- Columna Fecha de Datos -->
@@ -99,4 +134,3 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/gasStation', row.id]" style="cursor: pointer;"></tr>
     </table>
 </div>
-  

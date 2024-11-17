@@ -27,6 +27,15 @@ table {
     width: 10%;
 }
 
+.mat-column-distance,
+.mat-column-travelTime,
+.mat-column-diesel,
+.mat-column-dieselPremium, 
+.mat-column-gasolina95,
+.mat-column-gasolina98 {
+    text-align: center;
+}
+
 .mat-column-marca {
     width: 25%;
 }
@@ -53,4 +62,4 @@ th.mat-header-cell, td.mat-cell {
 .marcaImg{
     max-width: 15%;
     height: auto;
-}
+}  

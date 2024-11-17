@@ -45,4 +45,52 @@ export class GasStationService {
       })
     );
    }
+
+   calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {    
+    const R = 6371; // Radio de la Tierra en kilómetros
+    const dLat = this.degreesToRadians(lat2 - lat1);
+    const dLon = this.degreesToRadians(lon2 - lon1);
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.degreesToRadians(lat1)) * Math.cos(this.degreesToRadians(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+  
+  degreesToRadians(degrees: number): number {
+    return degrees * (Math.PI / 180);
+  }
+
+  addDistance(data: GasStationDTO[], userCoordinates: [number, number]): GasStationDTO[]{
+    data.forEach((gasStation) => {
+      const dist = this.calculateDistance(
+        userCoordinates[0],
+        userCoordinates[1],
+        gasStation.latitud,
+        gasStation.longitud
+      );
+      gasStation.distance = dist;
+    });
+    return data;
+  }
+
+  calculateTravelTime(distance: number, averageSpeed: number): number {
+    if (distance <= 0) {
+      return 0;
+    }
+  
+    const timeInHours = distance / averageSpeed;
+    const minutes = timeInHours * 60;
+  
+    return minutes;
+  }
+
+  addTravelTime(data: GasStationDTO[]): GasStationDTO[]{
+    data.forEach((gasStation) => {
+      const time = this.calculateTravelTime(gasStation.distance, 40);
+      gasStation.travelTime = time;
+    });
+    return data;
+  }
 }

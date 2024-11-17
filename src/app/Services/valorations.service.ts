@@ -10,8 +10,8 @@ export class ValorationsService {
   private urlValorationsApi: string;
 
   constructor(private http: HttpClient) {
-    this.urlValorationsApi = 'http://localhost:3000/valorations';  //Entorno PRE
-    //this.urlValorationsApi = 'https://searchgasbe.onrender.com/valorations';  //Entorno PROD
+    //this.urlValorationsApi = 'http://localhost:3000/valorations';  //Entorno PRE
+    this.urlValorationsApi = 'https://searchgasbe.onrender.com/valorations';  //Entorno PROD
   }
 
   getValorationsByGasStation(gasStationId: number): Observable<ValorationsDTO[]> {

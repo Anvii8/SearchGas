@@ -7,10 +7,10 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
 
-    p{
-        margin: 0;
-    }
+.apartadoFavoritosTitulo{
+    margin: 0;
 }
 
 .button_user{

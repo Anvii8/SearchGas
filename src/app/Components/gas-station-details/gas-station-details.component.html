@@ -5,7 +5,7 @@
 
     <div *ngIf="gasStation">
         <div class="apartadoFavoritos">
-            <p>Añadir a favoritos: </p>
+            <p class="apartadoFavoritosTitulo">Añadir a favoritos: </p>
             <button class="button_user" (click)="toggleFavorite(gasStation.id)">
                 <mat-icon *ngIf="isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite"></mat-icon>
                 <mat-icon *ngIf="!isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite_border"></mat-icon>

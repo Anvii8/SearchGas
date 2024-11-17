@@ -1,0 +1,53 @@
+<div class="p-3">
+    <h1>Opiniones de clientes</h1>
+    <div class="rating-icons">
+        <mat-icon *ngFor="let icon of getAverageRatingIcons()" aria-hidden="false" fontIcon="{{ icon }}"></mat-icon>
+        <p class="average">{{ average }} de 5</p>
+    </div>
+    <span *ngIf="!haveValorations">Aun no hay ninguna valoración ni comentario para esta gasolinera.</span>
+    <div *ngIf="haveValorations">
+        <h2 class="apartadoValoraciones"><strong>Principales valoraciones</strong></h2>
+        <div *ngFor="let valoration of valorations" class="valoration-item">
+            <div class="valoration-header">
+                <p><strong>Usuario: </strong> {{ valoration.userName }} {{ valoration.userSurname }} </p>
+                <div>
+                    <mat-icon *ngFor="let icon of getRatingIcons(valoration.rating)" aria-hidden="false" fontIcon="{{ icon }}"></mat-icon>
+                </div>
+            </div>
+            <p class="date">{{ valoration.createdAt | date: 'shortDate' }}</p>
+            <p class="comment">{{ valoration.comment }}</p>                
+        </div>
+    </div>
+
+    <div class="contentComentario">
+        <span><strong>Escribe tu opinión</strong></span>
+        <mat-form-field class="comentario">
+            <mat-label>Escribe aquí tu opinión</mat-label>
+            <textarea [(ngModel)]="comentario" placeholder="Escribe aquí tu opinión" matInput required #comentarioInput="ngModel"></textarea>
+            <mat-error *ngIf="comentarioInput.invalid && comentarioInput.touched">
+                El comentario no puede estar vacío.
+            </mat-error>
+        </mat-form-field>
+        <span><strong>Valoración</strong></span> 
+        <div>
+            <button class="button_user" (click)="voteFavorite(1)" (mouseenter)="hoverStars = 1" (mouseleave)="hoverStars = 0">
+                <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 1 || selectedStars >= 1 ? 'star' : 'star_border'"></mat-icon>
+            </button>
+            <button class="button_user" (click)="voteFavorite(2)" (mouseenter)="hoverStars = 2" (mouseleave)="hoverStars = 0">
+                <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 2 || selectedStars >= 2 ? 'star' : 'star_border'"></mat-icon>
+            </button>
+            <button class="button_user" (click)="voteFavorite(3)" (mouseenter)="hoverStars = 3" (mouseleave)="hoverStars = 0">
+                <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 3 || selectedStars >= 3 ? 'star' : 'star_border'"></mat-icon>
+            </button>
+            <button class="button_user" (click)="voteFavorite(4)" (mouseenter)="hoverStars = 4" (mouseleave)="hoverStars = 0">
+                <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 4 || selectedStars >= 4 ? 'star' : 'star_border'"></mat-icon>
+            </button>
+            <button class="button_user" (click)="voteFavorite(5)" (mouseenter)="hoverStars = 5" (mouseleave)="hoverStars = 0">
+                <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 5 || selectedStars >= 5 ? 'star' : 'star_border'"></mat-icon>
+            </button>
+        </div>
+        <div class="submitButton">
+            <button mat-raised-button (click)="addValoration()" [disabled]="comentarioInput.invalid" type="submit">Enviar</button>
+        </div>
+    </div>
+</div>

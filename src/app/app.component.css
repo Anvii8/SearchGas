@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     color: black;
     height: 100vh;
-    font-family: "Roboto", sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 16px;
     line-height: 24px;
 }

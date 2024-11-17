@@ -15,16 +15,25 @@ export class GasStationService {
     this.urlGasolinerasApi = 'https://searchgasbe.onrender.com/gasstations';  //Entorno PROD
   }
 
-   getGasStationByLocation(location:  string): Observable<GasStationDTO[]>{    
+  getAllLocations(): Observable<string[]>{    
+    return this.http.get<string[]>(this.urlGasolinerasApi + '/locations').pipe(
+      catchError(err => {
+        console.error('Error al obtener todas las localidades', err);
+        return throwError(() => new Error(err));
+      })
+    );
+  }
+  
+  getGasStationByLocation(location:  string): Observable<GasStationDTO[]>{    
     return this.http.get<GasStationDTO[]>(this.urlGasolinerasApi + '/location/' + location).pipe(
       catchError(err => {
         console.error('Error al obtener las gasolineras por localidad', err);
         return throwError(() => new Error(err));
       })
     );
-   }
+  }
 
-   getGasStationByLocationAndFuel(location:  string, fuel: string[]): Observable<GasStationDTO[]>{
+  getGasStationByLocationAndFuel(location:  string, fuel: string[]): Observable<GasStationDTO[]>{
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);    
     return this.http.get<GasStationDTO[]>(this.urlGasolinerasApi + '/location/' + location + '/fuel/' + fuel, { headers }).pipe(
@@ -33,9 +42,9 @@ export class GasStationService {
         return throwError(() => new Error(err));
       })
     );
-   }
+  }
 
-   getGasStationById(id:  number): Observable<GasStationDTO>{
+  getGasStationById(id:  number): Observable<GasStationDTO>{
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);    
     return this.http.get<GasStationDTO>(this.urlGasolinerasApi + '/id/' + id, { headers }).pipe(
@@ -44,9 +53,9 @@ export class GasStationService {
         return throwError(() => new Error(err));
       })
     );
-   }
+  }
 
-   calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {    
+  calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {    
     const R = 6371; // Radio de la Tierra en kilómetros
     const dLat = this.degreesToRadians(lat2 - lat1);
     const dLon = this.degreesToRadians(lon2 - lon1);

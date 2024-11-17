@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { HeaderView } from 'src/app/Models/header-view.dto';
 import { GasStationStateService } from 'src/app/Services/gas-station-state.service';
+import { GasStationService } from 'src/app/Services/gas-station.service';
 import { HeaderViewService } from 'src/app/Services/header-view.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class SearchFieldComponent implements OnInit{
   showNoAuthSection: boolean;
   geoAccepted: boolean;
   geolocationUser: [number, number] = [0, 0];
+  allLocations: string[];
 
   @Output() locationSelected = new EventEmitter<string>();
   @Output() fuelSelected = new EventEmitter<string[]>();
@@ -35,13 +37,17 @@ export class SearchFieldComponent implements OnInit{
     { validators: [this.atLeastOneSelected, this.atLeastOneSelectedLocation.bind(this)] }
 );
   
-  constructor(private headerMenusService: HeaderViewService, private gasStationStateService: GasStationStateService){
+  constructor(private headerMenusService: HeaderViewService, private gasStationStateService: GasStationStateService, private gasStationService: GasStationService){
     this.showAuthSection = false;
     this.showNoAuthSection = true;
     this.geoAccepted = false;
+    this.allLocations = [];
   }
 
   ngOnInit(): void {
+    this.gasStationService.getAllLocations().subscribe(data => {   
+      this.allLocations = data
+    });
     this.headerMenusService.headerManagement.subscribe(
       (headerInfo: HeaderView) => {
         if (headerInfo) {
@@ -49,7 +55,7 @@ export class SearchFieldComponent implements OnInit{
           this.showNoAuthSection = headerInfo.showNoAuthSection;
           if(this.showAuthSection){
             const savedState = this.gasStationStateService.getGasStationsState();
-            if(savedState){
+            if(savedState){   
               this.locationFormControl.setValue(savedState.location);
               this.dieselControl.setValue(savedState.fuel[0]);
               this.gasControl.setValue(savedState.fuel[1]);

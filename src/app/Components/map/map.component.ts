@@ -56,9 +56,7 @@ export class MapComponent implements AfterViewInit{
     this.clearMarkers();
     gasStations.forEach(station => {
       if (station.latitud && station.longitud) {
-        const lat = parseFloat(station.latitud.replace(',', '.'));
-        const lon = parseFloat(station.longitud.replace(',', '.'));
-        const marker = leaflet.marker([lat, lon]).addTo(this.map).bindPopup(`<b>${station.marca}</b><br>${station.direccion}`);
+        const marker = leaflet.marker([station.latitud, station.longitud]).addTo(this.map).bindPopup(`<b>${station.marca}</b><br>${station.direccion}`);
         this.markers.push(marker);
       }
     });

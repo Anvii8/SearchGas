@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { HeaderView } from 'src/app/Models/header-view.dto';
+import { GasStationStateService } from 'src/app/Services/gas-station-state.service';
 import { HeaderViewService } from 'src/app/Services/header-view.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class SearchFieldComponent implements OnInit{
     { validators: [this.atLeastOneSelected, this.atLeastOneSelectedLocation.bind(this)] }
 );
   
-  constructor(private headerMenusService: HeaderViewService){
+  constructor(private headerMenusService: HeaderViewService, private gasStationStateService: GasStationStateService){
     this.showAuthSection = false;
     this.showNoAuthSection = true;
     this.geoAccepted = false;
@@ -46,6 +47,14 @@ export class SearchFieldComponent implements OnInit{
         if (headerInfo) {
           this.showAuthSection = headerInfo.showAuthSection;
           this.showNoAuthSection = headerInfo.showNoAuthSection;
+          if(this.showAuthSection){
+            const savedState = this.gasStationStateService.getGasStationsState();
+            if(savedState){
+              this.locationFormControl.setValue(savedState.location);
+              this.dieselControl.setValue(savedState.fuel[0]);
+              this.gasControl.setValue(savedState.fuel[1]);
+            }
+          }
           this.searchForm.updateValueAndValidity();
         }
       }

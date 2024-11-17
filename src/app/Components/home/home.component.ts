@@ -3,6 +3,7 @@ import { MapComponent } from '../map/map.component';
 import { GasStationDTO } from 'src/app/Models/gas-station.dto';
 import { GeoService } from 'src/app/Services/geo.service';
 import { catchError, of } from 'rxjs';
+import { GasStationStateService } from 'src/app/Services/gas-station-state.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
   @ViewChild('map') mapComponent!: MapComponent;
   gasStations: GasStationDTO[] = [];
 
-  constructor(private geoService: GeoService){}
+  constructor(private geoService: GeoService, private gasStationStateService: GasStationStateService){}
 
   locationSelected(location:string): void{
     this.location = location;
@@ -49,6 +50,10 @@ export class HomeComponent {
       this.mapComponent.resetMapView();
     }
     else{
+      const savedState = this.gasStationStateService.getGasStationsState();
+      if (savedState) {
+        this.location = savedState.location;      
+      }
       this.mapComponent.updateMapLocation(this.location);
       this.mapComponent.addMapGasStations(this.gasStations);
     }

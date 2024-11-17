@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
     };
     this.headerMenusService.headerManagement.next(headerInfo);
 
-    this.router.navigateByUrl('home');
+    window.location.href = '/';
   }
 
   getUsernameById(): void {

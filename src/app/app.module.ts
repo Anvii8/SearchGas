@@ -30,6 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ValorationsComponent } from './Components/valorations/valorations.component';
 
 
 
@@ -46,7 +47,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MapComponent,
     NotificationDialogComponent,
     FavoritesComponent,
-    GasStationDetailsComponent
+    GasStationDetailsComponent,
+    ValorationsComponent
   ],
   imports: [
     BrowserModule,

@@ -107,7 +107,7 @@
 
             <!-- Columna Distancia en Km -->
             <ng-container matColumnDef="distance">
-                <th mat-sort-header="travelTime" mat-header-cell *matHeaderCellDef> Distancia (km) </th>
+                <th mat-header-cell *matHeaderCellDef> Distancia (km) </th>
                 <td mat-cell *matCellDef="let gasStation">
                 {{ gasStation.distance | number: '1.2-2' }}
                 </td>

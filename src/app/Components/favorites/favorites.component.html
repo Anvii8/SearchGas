@@ -1,1 +1,46 @@
-<p>favorites works!</p>
+<div *ngIf="favoritesIsEmpty">
+    <h1 class="noFavoritos">Aún no tienes ninguna gasolinera como favorita.</h1>
+</div>
+
+<div class="container" *ngIf="!favoritesIsEmpty">
+    <h1 class="tituloFavoritos">Gasolineras Favoritas</h1>
+    <ul class="listaGasolineras">
+        <li *ngFor="let gasStation of gasStationsfavorites" class="contentlista">
+            <a [routerLink]="['/gasStation', gasStation.id]" class="enlacesCards">
+                <mat-card class="card" appearance="outlined">
+                    <mat-card-header>
+                        <div mat-card-avatar class="station-avatar">
+                            <img [src]="'./assets/images/' + gasStation.marca + '.png'" alt="{{ gasStation.marca }}">
+                        </div>
+                        <mat-card-title-group>
+                            <mat-card-title>{{ gasStation.marca }}</mat-card-title>
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content class="station-content">
+                            <div class="station-column1">
+                                <p><strong>Direccion:</strong> {{ gasStation.direccion }}</p>
+                                <p><strong>Localidad:</strong> {{ gasStation.localidad }}</p>
+                                <p><strong>Horario:</strong> {{ gasStation.horario }}</p>
+                            </div>
+
+                            <div class="station-divider"></div>
+                            
+                            <div class="station-column2">
+                                <div *ngFor="let fuel of getFuelPrices(gasStation)">
+                                    <p class="fuel-type">{{ fuel.type }}</p>
+                                    <p class="fuel-price">{{ fuel.price }} €/L</p>
+                                </div>
+                                <div>
+                                    <p ><strong>Toma de datos:</strong></p>
+                                    <p>{{ gasStation.fechadatos }}</p>
+                                </div>
+                            </div>
+                    </mat-card-content>
+                </mat-card>
+            </a>
+            <button class="button_remove" (click)="removeFavorite(gasStation.id)">
+                <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>   
+            </button>   
+        </li>
+    </ul>
+</div>

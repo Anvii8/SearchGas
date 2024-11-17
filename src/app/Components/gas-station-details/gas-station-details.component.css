@@ -1,7 +1,29 @@
+.tituloDetalles{
+    margin-top: 20px;
+    font-size: xx-large;
+}
+
+.apartadoFavoritos{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    p{
+        margin: 0;
+    }
+}
+
+.button_user{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+}
+
 .map{
     width: 700px;
     height: 530px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     margin-top: 50px;
 }
 
@@ -9,4 +31,8 @@
     .map{
         width: 360px;
     }
+}
+
+.btn{
+    margin-top: 40px;
 }

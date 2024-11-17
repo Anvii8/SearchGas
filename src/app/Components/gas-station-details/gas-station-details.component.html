@@ -1,7 +1,16 @@
-<div class="container mt-5">
+<div class="container">
+    <h1 class="tituloDetalles"> Información detallada de la gasolinera</h1>
+
     <div id="map2" class="map"></div>
 
     <div *ngIf="gasStation">
+        <div class="apartadoFavoritos">
+            <p>Añadir a favoritos: </p>
+            <button class="button_user" (click)="toggleFavorite(gasStation.id)">
+                <mat-icon *ngIf="isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite"></mat-icon>
+                <mat-icon *ngIf="!isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite_border"></mat-icon>
+            </button> 
+        </div>
         <mat-tab-group>
             <!-- Información General -->
             <mat-tab label="Información General">
@@ -10,6 +19,8 @@
                     <p><strong>Localidad:</strong> {{ gasStation.localidad }}</p>
                     <p><strong>Dirección:</strong> {{ gasStation.direccion }}</p>
                     <p><strong>Horario:</strong> {{ gasStation.horario }}</p>
+                    <p><strong>Distancia hasta la gasolinera:</strong> {{ gasStation.distance | number: '1.2-2' }} km</p>
+                    <p><strong>Tiempo estimado de llegada:</strong> {{ gasStation.travelTime | number: '1.2-2' }} min</p>
                 </div>
             </mat-tab>
 
@@ -25,16 +36,17 @@
             <!-- Precios de Combustible -->
             <mat-tab label="Precios de Combustible">
                 <div class="p-3">
-                    <p><strong>Gasolina 95:</strong> {{ gasStation.preciogasolina95 }} €/L</p>
-                    <p><strong>Gasolina 98:</strong> {{ gasStation.preciogasolina98 }} €/L</p>
-                    <p><strong>Diesel:</strong> {{ gasStation.preciodiesel }} €/L</p>
-                    <p><strong>Diesel Premium:</strong> {{ gasStation.preciodieselpremium }} €/L</p>
+                    <p><strong>Gasolina 95:</strong> {{ gasStation.preciogasolina95 != 0.000 ? gasStation.preciogasolina95 : '-' }} €/L</p>
+                    <p><strong>Gasolina 98:</strong> {{ gasStation.preciogasolina98 != 0.000 ? gasStation.preciogasolina98  : '-' }} €/L</p>
+                    <p><strong>Diesel:</strong> {{ gasStation.preciodiesel != 0.000 ? gasStation.preciodiesel  : '-' }} €/L</p>
+                    <p><strong>Diesel Premium:</strong> {{ gasStation.preciodieselpremium != 0.000 ? gasStation.preciodieselpremium  : '-' }} €/L</p>
                 </div>
+            </mat-tab>
+            <mat-tab label="Valoraciones">
+                <app-valorations [gasStationId]="gasStationId"></app-valorations>
             </mat-tab>
         </mat-tab-group>
 
-        <div class="text-end mt-3">
-            <a class="btn btn-danger" routerLink="/">Volver</a>
-        </div>
+        <a class="btn btn-danger" (click)="goBack()">Volver</a>
     </div>
 </div>

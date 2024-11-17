@@ -64,8 +64,8 @@ export class LoginComponent {
         });
         setTimeout(() => {
           dialogRef.close();
-          this.router.navigateByUrl('home');
-        }, 2000);
+          window.location.href = '/';
+        }, 1000);
       },
       (error) => {
         const headerInfo: HeaderView = {

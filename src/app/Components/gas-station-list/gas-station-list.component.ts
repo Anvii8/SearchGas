@@ -188,6 +188,12 @@ export class GasStationListComponent implements OnInit {
 
   private compare(a: number, b: number, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }  
+  }
+  
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    target.src = './assets/images/Defecto.png';
+  }
+
 }
 

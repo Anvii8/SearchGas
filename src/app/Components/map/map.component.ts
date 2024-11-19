@@ -17,7 +17,7 @@ leaflet.Icon.Default.mergeOptions({
 
 export class MapComponent implements AfterViewInit{
   private map!: leaflet.Map;
-  private initCoordinates: [number, number] = [40.463667, -3.74922];
+  private initCoordinates: [number, number] = [41.8375, 1.5377777777778];
   private userCoordinates!: [number, number];
   private markers: leaflet.Marker[] = [];
 
@@ -29,7 +29,7 @@ export class MapComponent implements AfterViewInit{
   constructor(private geoService: GeoService) {}
 
   private initMap(): void {
-    this.map = leaflet.map('map').setView(this.initCoordinates, 6);
+    this.map = leaflet.map('map').setView(this.initCoordinates, 7.5);
 
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,

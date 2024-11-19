@@ -18,7 +18,7 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
   gasStation!: GasStationDTO;
   private map!: leaflet.Map;
   private markers: leaflet.Marker[] = [];
-  private initCoordinates: [number, number] = [40.463667, -3.74922];
+  private initCoordinates: [number, number] = [41.8375, 1.5377777777778];
   private userCoordinates!: [number, number];
   private userIcon = leaflet.icon({
     iconUrl: './assets/leaflet/marker-user.png',

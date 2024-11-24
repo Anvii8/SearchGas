@@ -49,4 +49,9 @@ export class FavoritesComponent {
     ].filter(fuel => fuel.price != 0.000);
   }
 
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    target.src = './assets/images/Defecto.webp';
+  }
+
 }

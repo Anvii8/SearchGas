@@ -10,7 +10,10 @@
                 <mat-card class="card" appearance="outlined">
                     <mat-card-header>
                         <div mat-card-avatar class="station-avatar">
-                            <img [src]="'./assets/images/' + gasStation.marca + '.png'" alt="{{ gasStation.marca }}">
+                            <img 
+                            [src]="'./assets/images/' + gasStation.marca + '.webp'" 
+                            alt="{{ gasStation.marca }}" 
+                            (error)="onImageError($event)">
                         </div>
                         <mat-card-title-group>
                             <mat-card-title>{{ gasStation.marca }}</mat-card-title>

@@ -22,7 +22,12 @@ export class MapComponent implements AfterViewInit{
   private markers: leaflet.Marker[] = [];
 
   private userIcon = leaflet.icon({
-    iconUrl: './assets/leaflet/marker-user.png',
+    iconUrl: './assets/leaflet/marker-user.webp',
+    iconSize: [41, 41]
+  });
+
+  private gasstationIcon = leaflet.icon({
+    iconUrl: './assets/leaflet/marker-gasStation.webp',
     iconSize: [41, 41]
   });
 
@@ -56,7 +61,7 @@ export class MapComponent implements AfterViewInit{
     this.clearMarkers();
     gasStations.forEach(station => {
       if (station.latitud && station.longitud) {
-        const marker = leaflet.marker([station.latitud, station.longitud]).addTo(this.map).bindPopup(`<b>${station.marca}</b><br>${station.direccion}`);
+        const marker = leaflet.marker([station.latitud, station.longitud], {icon: this.gasstationIcon}).addTo(this.map).bindPopup(`<b>${station.marca}</b><br>${station.direccion}`);
         this.markers.push(marker);
       }
     });

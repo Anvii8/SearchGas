@@ -1,14 +1,15 @@
 <form class="search_form" *ngIf="showNoAuthSection">
     <mat-form-field class="search_form_field">
         <mat-label>Inserte una población</mat-label>
-        <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell" list="locations">
+        <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell" [matAutocomplete]="locations">
+        <mat-autocomplete #locations="matAutocomplete">
+            <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+                {{ location }}
+            </mat-option>
+        </mat-autocomplete>
         <mat-error *ngIf="searchForm.hasError('locationNeeded')">Por favor, inserte una población</mat-error>
     </mat-form-field>
-    <datalist id="locations">
-        <div *ngFor="let location of allLocations">
-            <option value="{{ location }}"></option>
-        </div>
-    </datalist>
+
     <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.hasError('locationNeeded')" (click)="onSubmit()">
         Buscar
     </button>
@@ -18,13 +19,13 @@
     <div class="row">
         <mat-form-field class="search_form_field">
             <mat-label>Inserte una población</mat-label>
-            <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell" list="locations">
+            <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell" [matAutocomplete]="locations">
+            <mat-autocomplete #locations="matAutocomplete">
+                <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+                    {{ location }}
+                </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
-        <datalist id="locations">
-            <div *ngFor="let location of allLocations">
-                <option value="{{ location }}"></option>
-            </div>
-        </datalist>
         <button (click)="geolocation()" class="button_geolocation"  matTooltip="La ubicación puede no ser precisa" mat-icon-button aria-hidden="false" [ngClass]="{ 'highlighted': geoAccepted }">
             <mat-icon class="locationIcon" fontIcon="my_location"></mat-icon>
         </button>

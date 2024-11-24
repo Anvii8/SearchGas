@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { map, Observable, startWith } from 'rxjs';
 import { HeaderView } from 'src/app/Models/header-view.dto';
 import { GasStationStateService } from 'src/app/Services/gas-station-state.service';
 import { GasStationService } from 'src/app/Services/gas-station.service';
@@ -19,8 +20,9 @@ export class SearchFieldComponent implements OnInit{
   showNoAuthSection: boolean;
   geoAccepted: boolean;
   geolocationUser: [number, number] = [0, 0];
-  allLocations: string[];
-
+  allLocations: string[] = [];
+  filteredLocations!: Observable<string[]>;
+  
   @Output() locationSelected = new EventEmitter<string>();
   @Output() fuelSelected = new EventEmitter<string[]>();
   @Output() geolocationSelected = new EventEmitter<[number, number]>();
@@ -41,12 +43,16 @@ export class SearchFieldComponent implements OnInit{
     this.showAuthSection = false;
     this.showNoAuthSection = true;
     this.geoAccepted = false;
-    this.allLocations = [];
   }
 
   ngOnInit(): void {
     this.gasStationService.getAllLocations().subscribe(data => {   
       this.allLocations = data
+
+      this.filteredLocations = this.locationFormControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => this.filterLocations(value || ''))
+      );
     });
     this.headerMenusService.headerManagement.subscribe(
       (headerInfo: HeaderView) => {
@@ -64,6 +70,13 @@ export class SearchFieldComponent implements OnInit{
           this.searchForm.updateValueAndValidity();
         }
       }
+    );
+  }
+
+  private filterLocations(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allLocations.filter((location) =>
+      location.toLowerCase().includes(filterValue)
     );
   }
 

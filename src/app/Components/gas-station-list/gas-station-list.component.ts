@@ -192,7 +192,7 @@ export class GasStationListComponent implements OnInit {
   
   onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
-    target.src = './assets/images/Defecto.png';
+    target.src = './assets/images/Defecto.webp';
   }
 
 }

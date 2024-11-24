@@ -13,128 +13,130 @@
         Gasolineras en {{ location }}
         <mat-icon *ngIf="isAuthenticated" matTooltip="Puede ordenar los resultados acercando el ratón a las columnas que indican el tipo de combustible, distancia y tiempo estimado." fontIcon="info"></mat-icon>
     </h2>
-
-    <table mat-table [dataSource]="gasStations" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
-        <!-- Columna Marca -->
-        <ng-container matColumnDef="marca">
-            <th mat-header-cell *matHeaderCellDef> Marca </th>
-            <td mat-cell *matCellDef="let gasStation">
-                <img 
-                [src]="'./assets/images/' + gasStation.marca + '.png'" 
-                alt="{{ gasStation.marca }}" 
-                class="marcaImg" 
-                (error)="onImageError($event)">
-                {{ gasStation.marca }}
-            </td>
-        </ng-container>
+    <div class="table-container">
+        <table mat-table [dataSource]="gasStations" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
+            <!-- Columna Marca -->
+            <ng-container matColumnDef="marca">
+                <th mat-header-cell *matHeaderCellDef> Marca </th>
+                <td mat-cell *matCellDef="let gasStation">
+                    <img 
+                    [src]="'./assets/images/' + gasStation.marca + '.webp'" 
+                    alt="{{ gasStation.marca }}" 
+                    class="marcaImg" 
+                    (error)="onImageError($event)">
+                    {{ gasStation.marca }}
+                </td>
+            </ng-container>
+        
+            <!-- Columna Dirección -->
+            <ng-container matColumnDef="direccion">
+                <th mat-header-cell *matHeaderCellDef> Dirección </th>
+                <td mat-cell *matCellDef="let gasStation"> {{ gasStation.direccion }} </td>
+            </ng-container>
+        
+            <!-- Columna Localidad -->
+            <ng-container matColumnDef="localidad">
+                <th mat-header-cell *matHeaderCellDef> Localidad </th>
+                <td mat-cell *matCellDef="let gasStation"> {{ gasStation.localidad }} </td>
+            </ng-container>
+        
+            <!-- Columna Horario -->
+            <ng-container matColumnDef="horario">
+                <th mat-header-cell *matHeaderCellDef> Horario </th>
+                <td mat-cell *matCellDef="let gasStation"> {{ gasStation.horario }} </td>
+            </ng-container>
     
-        <!-- Columna Dirección -->
-        <ng-container matColumnDef="direccion">
-            <th mat-header-cell *matHeaderCellDef> Dirección </th>
-            <td mat-cell *matCellDef="let gasStation"> {{ gasStation.direccion }} </td>
-        </ng-container>
+            <!-- Combustibles Dinámicos -->
+            <ng-container *ngIf="isAuthenticated">
+                <ng-container *ngFor="let fuelType of fuel">
+                    <ng-container [matColumnDef]="fuelMapping[fuelType]">
+                        <th [mat-sort-header]="fuelMapping[fuelType]" mat-header-cell *matHeaderCellDef>
+                            {{ fuelType }} (€/L)
+                        </th>
+                        <td mat-cell *matCellDef="let gasStation">
+                            {{ gasStation[fuelPriceMapping[fuelType]] != 0.000 ? gasStation[fuelPriceMapping[fuelType]] : '-' }}
+                        </td>
+                    </ng-container>
+                </ng-container>
     
-        <!-- Columna Localidad -->
-        <ng-container matColumnDef="localidad">
-            <th mat-header-cell *matHeaderCellDef> Localidad </th>
-            <td mat-cell *matCellDef="let gasStation"> {{ gasStation.localidad }} </td>
-        </ng-container>
-    
-        <!-- Columna Horario -->
-        <ng-container matColumnDef="horario">
-            <th mat-header-cell *matHeaderCellDef> Horario </th>
-            <td mat-cell *matCellDef="let gasStation"> {{ gasStation.horario }} </td>
-        </ng-container>
-
-        <!-- Combustibles Dinámicos -->
-        <ng-container *ngIf="isAuthenticated">
-            <ng-container *ngFor="let fuelType of fuel">
-                <ng-container [matColumnDef]="fuelMapping[fuelType]">
-                    <th [mat-sort-header]="fuelMapping[fuelType]" mat-header-cell *matHeaderCellDef>
-                        {{ fuelType }} (€/L)
-                    </th>
+                <!-- Columna Distancia en Km -->
+                <ng-container matColumnDef="distance">
+                    <th mat-sort-header="distance" mat-header-cell *matHeaderCellDef> Distancia (km) </th>
                     <td mat-cell *matCellDef="let gasStation">
-                        {{ gasStation[fuelPriceMapping[fuelType]] != 0.000 ? gasStation[fuelPriceMapping[fuelType]] : '-' }}
+                    {{ gasStation.distance | number: '1.2-2' }}
+                    </td>
+                </ng-container>
+    
+                <!-- Columna Tiempo Distancia -->
+                <ng-container matColumnDef="travelTime">
+                    <th mat-sort-header="travelTime" mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                    {{ gasStation.travelTime | number: '1.2-2' }}
                     </td>
                 </ng-container>
             </ng-container>
-
-            <!-- Columna Distancia en Km -->
-            <ng-container matColumnDef="distance">
-                <th mat-sort-header="distance" mat-header-cell *matHeaderCellDef> Distancia (km) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                {{ gasStation.distance | number: '1.2-2' }}
-                </td>
-            </ng-container>
-
-            <!-- Columna Tiempo Distancia -->
-            <ng-container matColumnDef="travelTime">
-                <th mat-sort-header="travelTime" mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                {{ gasStation.travelTime | number: '1.2-2' }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <ng-container *ngIf="!isAuthenticated">
-            <!-- Columna Diesel -->
-            <ng-container matColumnDef="diesel">
-                <th mat-header-cell *matHeaderCellDef> Diesel (€/L) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                    {{ gasStation.preciodiesel != 0.000 ? gasStation.preciodiesel : '-' }}
-                </td>
-            </ng-container>
-            
-            <!-- Columna Diesel Premium -->
-            <ng-container matColumnDef="dieselPremium">
-                <th mat-header-cell *matHeaderCellDef> Diesel Premium (€/L) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                    {{ gasStation.preciodieselpremium != 0.000 ? gasStation.preciodieselpremium : '-' }}
-                </td>
-            </ng-container>
-            
-            <!-- Columna Gasolina 95 -->
-            <ng-container matColumnDef="gasolina95">
-                <th mat-header-cell *matHeaderCellDef> Gasolina 95 (€/L) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                    {{ gasStation.preciogasolina95 != 0.000 ? gasStation.preciogasolina95 : '-' }}
-                </td>
-            </ng-container>
-            
-            <!-- Columna Gasolina 98 -->
-            <ng-container matColumnDef="gasolina98">
-                <th mat-header-cell *matHeaderCellDef> Gasolina 98 (€/L) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                    {{ gasStation.preciogasolina98 != 0.000 ? gasStation.preciogasolina98 : '-' }}
-                </td>
-            </ng-container>
-
-            <!-- Columna Distancia en Km -->
-            <ng-container matColumnDef="distance">
-                <th mat-header-cell *matHeaderCellDef> Distancia (km) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                {{ gasStation.distance | number: '1.2-2' }}
-                </td>
-            </ng-container>
-
-            <!-- Columna Tiempo Distancia -->
-            <ng-container matColumnDef="travelTime">
-                <th mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
-                <td mat-cell *matCellDef="let gasStation">
-                {{ gasStation.travelTime | number: '1.2-2' }}
-                </td>
-            </ng-container>
-        </ng-container>
-
-        <!-- Columna Fecha de Datos -->
-        <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef> Fecha de Datos </th>
-            <td mat-cell *matCellDef="let gasStation"> {{ gasStation.fechadatos }} </td>
-        </ng-container>
     
-        <div *ngIf="isSearched">
-            <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        </div>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/gasStation', row.id]" style="cursor: pointer;"></tr>
-    </table>
+            <ng-container *ngIf="!isAuthenticated">
+                <!-- Columna Diesel -->
+                <ng-container matColumnDef="diesel">
+                    <th mat-header-cell *matHeaderCellDef> Diesel (€/L) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                        {{ gasStation.preciodiesel != 0.000 ? gasStation.preciodiesel : '-' }}
+                    </td>
+                </ng-container>
+                
+                <!-- Columna Diesel Premium -->
+                <ng-container matColumnDef="dieselPremium">
+                    <th mat-header-cell *matHeaderCellDef> Diesel Premium (€/L) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                        {{ gasStation.preciodieselpremium != 0.000 ? gasStation.preciodieselpremium : '-' }}
+                    </td>
+                </ng-container>
+                
+                <!-- Columna Gasolina 95 -->
+                <ng-container matColumnDef="gasolina95">
+                    <th mat-header-cell *matHeaderCellDef> Gasolina 95 (€/L) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                        {{ gasStation.preciogasolina95 != 0.000 ? gasStation.preciogasolina95 : '-' }}
+                    </td>
+                </ng-container>
+                
+                <!-- Columna Gasolina 98 -->
+                <ng-container matColumnDef="gasolina98">
+                    <th mat-header-cell *matHeaderCellDef> Gasolina 98 (€/L) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                        {{ gasStation.preciogasolina98 != 0.000 ? gasStation.preciogasolina98 : '-' }}
+                    </td>
+                </ng-container>
+    
+                <!-- Columna Distancia en Km -->
+                <ng-container matColumnDef="distance">
+                    <th mat-header-cell *matHeaderCellDef> Distancia (km) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                    {{ gasStation.distance | number: '1.2-2' }}
+                    </td>
+                </ng-container>
+    
+                <!-- Columna Tiempo Distancia -->
+                <ng-container matColumnDef="travelTime">
+                    <th mat-header-cell *matHeaderCellDef> Tiempo Estimado (min) </th>
+                    <td mat-cell *matCellDef="let gasStation">
+                    {{ gasStation.travelTime | number: '1.2-2' }}
+                    </td>
+                </ng-container>
+            </ng-container>
+    
+            <!-- Columna Fecha de Datos -->
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha de Datos </th>
+                <td mat-cell *matCellDef="let gasStation"> {{ gasStation.fechadatos }} </td>
+            </ng-container>
+        
+            <div *ngIf="isSearched">
+                <tr class="titlesTable" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            </div>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/gasStation', row.id]" style="cursor: pointer;"></tr>
+        </table>
+    </div>
+
 </div>

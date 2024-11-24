@@ -24,6 +24,11 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
     iconUrl: './assets/leaflet/marker-user.png',
     iconSize: [41, 41]
   });
+  private gasstationIcon = leaflet.icon({
+    iconUrl: './assets/leaflet/marker-gasStation.png',
+    iconSize: [41, 41]
+  });
+
   favorites: FavoritesDTO[] = [];
   userId: string | null;
   gasStationId: number;
@@ -70,7 +75,7 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
 
   addMapGasStation(gasStation: GasStationDTO): void {
     if (gasStation.latitud && gasStation.longitud) {
-      const marker = leaflet.marker([gasStation.latitud, gasStation.longitud]).addTo(this.map).bindPopup(`<b>${gasStation.marca}</b><br>${gasStation.direccion}`);
+      const marker = leaflet.marker([gasStation.latitud, gasStation.longitud], {icon: this.gasstationIcon}).addTo(this.map).bindPopup(`<b>${gasStation.marca}</b><br>${gasStation.direccion}`);
       this.markers.push(marker);
     }
   }

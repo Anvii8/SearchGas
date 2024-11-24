@@ -62,10 +62,10 @@
 
       <section>
             <mat-checkbox class="checkbox" [formControl]="privacyPolicy" required>
-            He leído y acepto la política de privacidad*
+                He leído y acepto la <a [routerLink]="['/aboutUs']">política de privacidad*</a>
             </mat-checkbox>
             <mat-error class="checkboxError" *ngIf="submitted && privacyPolicy.hasError('required')">
-            Aceptar la política de privacidad es <strong>obligatorio</strong>.
+                Aceptar la política de privacidad es <strong>obligatorio</strong>.
             </mat-error>
       </section>
   

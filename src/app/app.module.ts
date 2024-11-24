@@ -31,7 +31,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ValorationsComponent } from './Components/valorations/valorations.component';
-
+import { PrivacyInformationComponent } from './Components/privacy-information/privacy-information.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ValorationsComponent } from './Components/valorations/valorations.compo
     NotificationDialogComponent,
     FavoritesComponent,
     GasStationDetailsComponent,
-    ValorationsComponent
+    ValorationsComponent,
+    PrivacyInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { ValorationsComponent } from './Components/valorations/valorations.compo
     MatTooltipModule,
     MatTableModule,
     MatSortModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

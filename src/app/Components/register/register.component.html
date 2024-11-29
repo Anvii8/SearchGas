@@ -70,7 +70,7 @@
       </section>
   
       <section class="button">
-            <button mat-raised-button type="submit">Crear Cuenta</button>
+            <button mat-raised-button [disabled]="!registerForm.valid" type="submit">Crear Cuenta</button>
       </section>
   
     </form>

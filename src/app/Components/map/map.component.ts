@@ -69,7 +69,7 @@ export class MapComponent implements AfterViewInit{
 
   resetMapView(): void {
     this.clearMarkers();
-    this.map.setView(this.initCoordinates, 6);
+    this.map.setView(this.initCoordinates, 7.5);
   }
 
   private clearMarkers(): void {

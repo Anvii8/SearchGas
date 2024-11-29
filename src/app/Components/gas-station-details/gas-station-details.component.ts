@@ -20,12 +20,14 @@ export class GasStationDetailsComponent implements OnInit, AfterViewInit {
   private markers: leaflet.Marker[] = [];
   private initCoordinates: [number, number] = [41.8375, 1.5377777777778];
   private userCoordinates!: [number, number];
+
   private userIcon = leaflet.icon({
-    iconUrl: './assets/leaflet/marker-user.png',
+    iconUrl: './assets/leaflet/marker-user.webp',
     iconSize: [41, 41]
   });
+
   private gasstationIcon = leaflet.icon({
-    iconUrl: './assets/leaflet/marker-gasStation.png',
+    iconUrl: './assets/leaflet/marker-gasStation.webp',
     iconSize: [41, 41]
   });
 

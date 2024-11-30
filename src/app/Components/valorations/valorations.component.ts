@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { ValorationsDTO } from 'src/app/Models/valorations.dto';
 import { ValorationsService } from 'src/app/Services/valorations.service';
 
@@ -72,12 +73,16 @@ export class ValorationsComponent implements OnInit {
     this.selectedStars = star;
   }
 
-  addValoration(): void{
+  addValoration(comentarioInput: NgModel): void{
     const userId = localStorage.getItem('user_id');
     this.valorationsService.addValoration(userId!, this.gasStationId, this.selectedStars, this.comentario).subscribe(
-      () =>
+      () => 
         {
           this.getValorations(this.gasStationId);
+          this.selectedStars = 0;
+          this.comentario =  '';
+          comentarioInput.control.markAsPristine();
+          comentarioInput.control.markAsUntouched();
         }
     );
   }

@@ -43,6 +43,9 @@ table {
 
 .mat-column-marca {
     width: 25%;
+    position: sticky;
+    left: 0;
+    z-index: 2;
 }
 
 .mat-column-fecha {

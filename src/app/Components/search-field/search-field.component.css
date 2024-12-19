@@ -64,3 +64,17 @@ mat-error{
 .highlighted .mat-icon {
     color: white;
 }
+
+@media (max-width: 400px){
+    .search_form {
+        flex-direction: column;
+        justify-content: left;
+        gap: 0;
+    }
+    .search_button{
+        width: 50%;
+        height: 40px;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+}

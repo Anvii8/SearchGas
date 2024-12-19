@@ -17,6 +17,7 @@ export class HomeComponent {
   geolocation!: [number, number];
   @ViewChild('map') mapComponent!: MapComponent;
   gasStations: GasStationDTO[] = [];
+  isGasStationListVisible: boolean = false;
 
   constructor(private geoService: GeoService, private gasStationStateService: GasStationStateService){}
 
@@ -54,6 +55,7 @@ export class HomeComponent {
       if (savedState) {
         this.location = savedState.location;      
       }
+      this.isGasStationListVisible = true;
       this.mapComponent.updateMapLocation(this.location);
       this.mapComponent.addMapGasStations(this.gasStations);
     }

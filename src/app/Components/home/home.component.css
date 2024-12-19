@@ -3,3 +3,29 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.vistaColumna{
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.vistaColumna app-map {
+    flex: 1;
+}
+  
+.vistaColumna app-gas-station-list {
+    flex: 1;
+}
+
+@media (max-width: 400px){
+    .title{
+        font-size: 40px;
+        text-align: center;
+    }
+    .vistaColumna{
+        flex-direction: column;
+    }
+}

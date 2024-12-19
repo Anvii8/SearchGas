@@ -1,6 +1,8 @@
 <div class="container">
     <h1 class="title">Search Gas</h1>
     <app-search-field (locationSelected)="locationSelected($event)" (fuelSelected)="FuelSelected($event)" (geolocationSelected)="geolocationSelected($event)"></app-search-field>
+</div>
+<div [ngClass]="{ 'container': !isGasStationListVisible, 'vistaColumna': isGasStationListVisible }">
     <app-map #map></app-map>
     <app-gas-station-list [location]="location" [fuel]="fuel" (gasStationsListReceived)="gasStationsListReceived($event)"></app-gas-station-list>
 </div>

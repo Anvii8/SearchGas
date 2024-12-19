@@ -46,7 +46,8 @@ export class SearchFieldComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.gasStationService.getAllLocations().subscribe(data => {   
+    this.gasStationService.getAllLocations().subscribe(data => {
+      data.sort((a, b) => a.localeCompare(b));   
       this.allLocations = data
 
       this.filteredLocations = this.locationFormControl.valueChanges.pipe(
@@ -83,9 +84,9 @@ export class SearchFieldComponent implements OnInit{
   onSubmit() {
     if(this.showAuthSection){
       if (this.searchForm.valid) {
-        const diesel = this.dieselControl.value;
-        const gas = this.gasControl.value;
-        const fuel = [diesel, gas].filter((value): value is string => value !== null && value !== undefined);
+        const diesel = this.dieselControl.value || [];
+        const gas = this.gasControl.value || [];
+        const fuel: string[] = [...diesel, ...gas];         
         if(this.geoAccepted){
           this.geolocationSelected.emit(this.geolocationUser);
         }
@@ -107,9 +108,11 @@ export class SearchFieldComponent implements OnInit{
 
   private atLeastOneSelected(control: AbstractControl): ValidationErrors | null {
     const diesel = control.get('dieselControl')?.value;
-    const gas = control.get('gasControl')?.value;
+    const gas = control.get('gasControl')?.value; 
+    const fuel2: string[] = [...diesel, ...gas];
 
-    if (!diesel && !gas) {
+    
+    if ((!diesel && !gas) || (diesel.length == 0 && gas.length == 0)) {
         return { atLeastOneRequired: true };
     }
     return null;

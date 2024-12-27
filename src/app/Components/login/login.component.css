@@ -1,14 +1,68 @@
-.title{
-    font-size: 56px;
-    margin-bottom: 30px;
-}
-
-.container-uoc{
+.containerLogin{
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 30px;
+}
+
+.title{
+    font-size: 28px;
+    color: royalblue;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.title::before,.title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+}
+  
+.title::before {
+    width: 18px;
+    height: 18px;
+    background-color: royalblue;
+}
+  
+.title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 550px;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.message, .login {
+    font-size: 14px;
+}
+
+.login {
+    margin-top: 10px;
+    text-align: center;
+}
+  
+.login a {
+    color: royalblue;
+}
+  
+.login a:hover {
+    text-decoration: underline royalblue;
 }
 
 mat-form-field{
@@ -19,14 +73,32 @@ mat-form-field{
     width: 250px;
 }
   
-.button{
-    text-align: center;
+.button {
     margin-top: 20px;
+    background-color: #f8a95f;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  
+.button:hover {
+    background-color: #FF7A00;
+    color: white;
+    box-shadow: 0px 15px 20px rgba(255, 122, 0, 0.4);
+    transform: translateY(-7px);
 }
 
-.button button {
-    width: 100%;
-    background-color: #FF7A00;
-    margin-top: 15px;
-    height: 48px;
+@keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+  
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
 }

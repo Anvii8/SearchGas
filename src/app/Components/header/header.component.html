@@ -3,6 +3,10 @@
         <img src="./assets/images/Logo.webp" alt="Logo de la web" class="logo">
     </a>
 
+    <p class="eslogan text-center lead">
+        Tu buscador de gasolineras cercanas
+    </p>
+
     <ng-container *ngIf="showNoAuthSection">
         <button class="button_user" mat-icon-button [matMenuTriggerFor]="authMenu" aria-hidden="false">
             <mat-icon class="userIcon" aria-hidden="false" fontIcon="account_circle"></mat-icon>
@@ -16,16 +20,18 @@
     <ng-container *ngIf="showAuthSection">
         <div class="infoHeaderUser">
             <p class="userName">Hola, {{ userName }}</p>
-            <button (click)="favorites()" class="button_user" mat-icon-button aria-hidden="false">
-                <mat-icon class="favoritesIcon" fontIcon="favorite"></mat-icon>
-            </button>
-            <button class="button_user" mat-icon-button [matMenuTriggerFor]="authMenu" aria-hidden="false">
-                <mat-icon class="userIcon" fontIcon="account_circle"></mat-icon>
-            </button>
-            <mat-menu #authMenu="matMenu">
-                <button (click)="favorites()" mat-menu-item>Gasolineras Favoritas</button>
-                <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
-            </mat-menu>
+            <div class="buttonsSection">
+                <button (click)="favorites()" class="button_user" mat-icon-button aria-hidden="false">
+                    <mat-icon class="favoritesIcon" fontIcon="favorite"></mat-icon>
+                </button>
+                <button class="button_user" mat-icon-button [matMenuTriggerFor]="authMenu" aria-hidden="false">
+                    <mat-icon class="userIcon" fontIcon="account_circle"></mat-icon>
+                </button>
+                <mat-menu #authMenu="matMenu">
+                    <button (click)="favorites()" mat-menu-item>Gasolineras Favoritas</button>
+                    <button (click)="logout()" mat-menu-item>Cerrar Sesión</button>
+                </mat-menu>
+            </div>
         </div>
     </ng-container>
 </div>

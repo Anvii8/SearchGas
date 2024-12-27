@@ -17,6 +17,7 @@
 .table-container {
     max-height: 400px;
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 table {
@@ -45,7 +46,7 @@ table {
     width: 25%;
     position: sticky;
     left: 0;
-    z-index: 2;
+    z-index: 1;
 }
 
 .mat-column-fecha {

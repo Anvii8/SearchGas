@@ -1,38 +1,162 @@
 .tituloDetalles{
     margin-top: 20px;
-    font-size: xx-large;
+    font-size: 32px;
 }
 
-.apartadoFavoritos{
+.button {
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+  
+.icon {
+    transition-duration: 0.3s;
+}
+  
+.button:hover {
+    width: 140px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: rgb(181, 160, 255);
+    align-items: center;
+}
+  
+.button:hover .icon {
+    transition-duration: 0.3s;
+    transform: translateX(-400%);
+}
+  
+.button::before {
+    position: absolute;
+    bottom: -20px;
+    content: "Back";
+}
+  
+.button:hover::before {
+    opacity: 1;
+    bottom: unset;
+    transition-duration: 0.3s;
+}
+
+.firstView {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.map {
+    flex: 1;
+    height: 530px; 
+    max-width: 70%;
+}
+  
+.apartadoFavoritos {
+    flex: 0;
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
     gap: 10px;
 }
 
-.apartadoFavoritosTitulo{
+.apartadoFavoritos p{
     margin: 0;
+    white-space: nowrap;
 }
 
-.button_user{
+.button_favorite{
     background-color: transparent;
     border: none;
     padding: 0;
     box-shadow: none;
+    width: 24px;
+    height: 24px;
 }
 
-.map{
-    width: 700px;
-    height: 530px;
-    margin-bottom: 40px;
-    margin-top: 50px;
+.button_favorite:hover{
+    animation: heartButton 1s;
 }
 
-@media (max-width: 400px){
-    .map{
-        width: 360px;
+.action {
+    position: relative;
+    overflow: hidden;
+}
+  
+.text-option {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.5s ease;
+    white-space: nowrap;
+}
+  
+.text-option.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+.text-option.hide {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.tab{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+@keyframes heartButton {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.3);
+    }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
     }
 }
 
-.btn{
-    margin-top: 40px;
+.info{
+    padding: 1rem;
+}
+
+@media (max-width: 400px){
+    .tituloDetalles{
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .map{
+        flex: none;
+        max-width: 100%;
+    }
+
+    .apartadoFavoritos {
+        flex: none;
+        margin-top: 20px;
+    }
+
+    .firstView {
+        flex-direction: column;
+    }
 }

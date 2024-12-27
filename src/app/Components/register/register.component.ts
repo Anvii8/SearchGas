@@ -52,7 +52,7 @@ export class RegisterComponent {
       Validators.minLength(8),
     ]);
 
-    this.privacyPolicy = new FormControl(false, [Validators.requiredTrue]);
+    this.privacyPolicy = new FormControl(false, [Validators.required]);
 
     this.registerForm = this.formBuilder.group({
       name: this.name,

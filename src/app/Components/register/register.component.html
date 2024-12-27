@@ -1,78 +1,59 @@
-<div class="container-uoc">
-    <h1 class="title">Search Gas</h1>
-    <h2>Crear Cuenta</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <section>
-        <mat-form-field appearance="fill">
-            <mat-label>Inserte su Nombre</mat-label>
-            <input matInput type="text" [formControl]="name" required>
-            <mat-error class="mat-error" *ngIf="name.hasError('minlength') && !name.hasError('required') && !name.hasError('maxlength')">
-                El nombre ha de tener al menos 5 caracteres.
-            </mat-error>
-            <mat-error class="mat-error" *ngIf="name.hasError('maxlength') && !name.hasError('required')">
-                El nombre no puede contener más de 25 caracteres.
-            </mat-error>
-            <mat-error *ngIf="name.hasError('required')">
-                El nombre es <strong>obligatorio</strong>
-            </mat-error>
-        </mat-form-field>
-      </section>
-  
-      <section>
-        <mat-form-field appearance="fill">
-            <mat-label>Inserte su Apellido</mat-label>
-            <input matInput type="text" [formControl]="surname" required>
-            <mat-error class="mat-error" *ngIf="surname.hasError('minlength') && !surname.hasError('required') && !surname.hasError('maxlength')">
-                El apellido ha de tener al menos 5 caracteres.
-            </mat-error>
-            <mat-error class="mat-error" *ngIf="surname.hasError('maxlength') && !surname.hasError('required')">
-                El apellido no puede contener más de 25 caracteres.
-            </mat-error>
-            <mat-error *ngIf="surname.hasError('required')">
-                El apellido es <strong>obligatorio</strong>
-            </mat-error>
-        </mat-form-field>
-      </section>
-  
-      <section>
-        <mat-form-field appearance="fill">
-            <mat-label>Inserte su Email</mat-label>
-            <input matInput type="email" [formControl]="email" required placeholder="Ex. pat@example.com">
-            <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required')">
-                Por favor, inserte un Email válido.
-            </mat-error>
-            <mat-error *ngIf="email.hasError('required')">
-                El Email es <strong>obligatorio</strong>
-            </mat-error>
-        </mat-form-field>
-      </section>
-  
-      <section>
-        <mat-form-field appearance="fill">
-            <mat-label>Inserte la Contraseña</mat-label>
-            <input matInput type="password" [formControl]="password" required>
-            <mat-error class="mat-error" *ngIf="password.hasError('minlength') && !password.hasError('required')">
-                La contraseña ha de contener más de 8 caracteres.
-            </mat-error>
-            <mat-error *ngIf="password.hasError('required')">
-                La contraseña es <strong>obligatorio</strong>
-            </mat-error>
-        </mat-form-field>
-      </section>
-
-      <section>
+<div class="containerRegister">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+        <p class="title">Registrarse</p>
+        <p class="message">Regístrate ahora y obtén acceso completo a nuestra aplicación.</p>
+        <div class="flex">
+            <section>
+                <mat-form-field appearance="fill">
+                    <mat-label>Inserte su Nombre</mat-label>
+                    <input matInput type="text" [formControl]="name" required>
+                    <mat-error class="mat-error" *ngIf="name.hasError('minlength') && !name.hasError('required') && !name.hasError('maxlength')">El nombre ha de tener al menos 5 caracteres.</mat-error>
+                    <mat-error class="mat-error" *ngIf="name.hasError('maxlength') && !name.hasError('required')">El nombre no puede contener más de 25 caracteres.</mat-error>
+                    <mat-error *ngIf="name.hasError('required')">El nombre es <strong>obligatorio</strong></mat-error>
+                </mat-form-field>
+            </section>
+        
+            <section>
+                <mat-form-field appearance="fill">
+                    <mat-label>Inserte su Apellido</mat-label>
+                    <input matInput type="text" [formControl]="surname" required>
+                    <mat-error class="mat-error" *ngIf="surname.hasError('minlength') && !surname.hasError('required') && !surname.hasError('maxlength')">El apellido ha de tener al menos 5 caracteres.</mat-error>
+                    <mat-error class="mat-error" *ngIf="surname.hasError('maxlength') && !surname.hasError('required')"> El apellido no puede contener más de 25 caracteres.</mat-error>
+                    <mat-error *ngIf="surname.hasError('required')">El apellido es <strong>obligatorio</strong></mat-error>
+                </mat-form-field>
+            </section>
+        </div>
+    
+        <section>
+            <mat-form-field appearance="fill">
+                <mat-label>Inserte su Email</mat-label>
+                <input matInput type="email" [formControl]="email" required placeholder="Ex. pat@example.com">
+                <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required')">Por favor, inserte un Email válido.</mat-error>
+                <mat-error *ngIf="email.hasError('required')">El Email es <strong>obligatorio</strong></mat-error>
+            </mat-form-field>
+        </section>
+    
+        <section>
+            <mat-form-field appearance="fill">
+                <mat-label>Inserte la Contraseña</mat-label>
+                <input matInput type="password" [formControl]="password" required>
+                <mat-error class="mat-error" *ngIf="password.hasError('minlength') && !password.hasError('required')">La contraseña ha de contener más de 8 caracteres.</mat-error>
+                <mat-error *ngIf="password.hasError('required')">La contraseña es <strong>obligatorio</strong></mat-error>
+            </mat-form-field>
+        </section>
+    
+        <section>
             <mat-checkbox class="checkbox" [formControl]="privacyPolicy" required>
-                He leído y acepto la <a [routerLink]="['/aboutUs']">política de privacidad*</a>
+                He leído y acepto la <a [routerLink]="['/aboutUs']">política de privacidad</a>
             </mat-checkbox>
-            <mat-error class="checkboxError" *ngIf="submitted && privacyPolicy.hasError('required')">
-                Aceptar la política de privacidad es <strong>obligatorio</strong>.
-            </mat-error>
-      </section>
-  
-      <section class="button">
-            <button mat-raised-button [disabled]="!registerForm.valid" type="submit">Crear Cuenta</button>
-      </section>
-  
+            <mat-error class="checkboxError" *ngIf="privacyPolicy.hasError('required')">Aceptar la política de privacidad es <strong>obligatorio</strong>.</mat-error>
+        </section>
+    
+        <button class="button" mat-stroked-button [disabled]="!registerForm.valid" type="submit">CREAR CUENTA</button>
+    
+        <p class="signin">
+            ¿Ya tiene una cuenta? <a [routerLink]="['/login']">Iniciar Sesión</a>
+        </p>
+    
     </form>
 </div>
-  

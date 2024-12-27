@@ -62,10 +62,15 @@ export class SearchFieldComponent implements OnInit{
           this.showNoAuthSection = headerInfo.showNoAuthSection;
           if(this.showAuthSection){
             const savedState = this.gasStationStateService.getGasStationsState();
-            if(savedState){   
+            if(savedState){
               this.locationFormControl.setValue(savedState.location);
-              this.dieselControl.setValue(savedState.fuel[0]);
-              this.gasControl.setValue(savedState.fuel[1]);
+              if (savedState.fuel && savedState.fuel.length) {
+                const dieselValues = savedState.fuel.filter((fuel: string) => fuel === "Diesel" || fuel === "Diesel Premium");
+                this.dieselControl.setValue(dieselValues);
+              
+                const gasValues = savedState.fuel.filter((fuel: string) => fuel === "Gasolina 95" || fuel === "Gasolina 98");
+                this.gasControl.setValue(gasValues);
+              }
             }
           }
           this.searchForm.updateValueAndValidity();

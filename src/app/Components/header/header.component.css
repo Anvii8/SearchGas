@@ -7,12 +7,16 @@
 }
 
 .enlaceLogo{
-    width: 100px;
+    width: 7%;
 }
 
 .logo {
     max-width: 100%;
     height: auto;
+}
+
+.eslogan{
+    font-size: 28px;
 }
 
 .button_user{
@@ -38,11 +42,34 @@
 .userName{
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .favoritesIcon{
     font-size: 30px;
     width: auto;
     height: auto;
+}
+
+@media (max-width: 400px){
+    .infoHeader{
+        flex-direction: column;
+    }
+    .infoHeaderUser{
+        column-gap: 140px;
+    }
+    .enlaceLogo{
+        width: 30%;
+        margin-bottom: 10px;
+    }
+    .eslogan{
+        font-size: 18px;
+    }
+    .userName{
+        font-size: 20px;
+    }
+    .buttonsSection{
+        display: flex;
+        justify-content: center;
+    }
 }

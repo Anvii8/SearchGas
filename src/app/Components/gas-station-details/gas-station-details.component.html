@@ -1,20 +1,26 @@
 <div class="container">
     <h1 class="tituloDetalles"> Información detallada de la gasolinera</h1>
 
-    <div id="map2" class="map"></div>
+    <button class="button" (click)="goBack()">
+        <mat-icon class="icon" aria-hidden="false" fontIcon="arrow_back"></mat-icon>
+    </button>      
 
-    <div *ngIf="gasStation">
-        <div class="apartadoFavoritos">
-            <p class="apartadoFavoritosTitulo">Añadir a favoritos: </p>
-            <button class="button_user" (click)="toggleFavorite(gasStation.id)">
-                <mat-icon *ngIf="isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite"></mat-icon>
-                <mat-icon *ngIf="!isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite_border"></mat-icon>
-            </button> 
+    <div class="firstView">
+        <div id="map2" class="map"></div>
+        <div class="apartadoFavoritos" *ngIf="gasStation">
+            <p *ngIf="isFavorite(gasStation.id)">Añadida a favoritos</p>
+            <p *ngIf="!isFavorite(gasStation.id)">Añadir a favoritos</p>
+            <button class="button_favorite" (click)="toggleFavorite(gasStation.id)">
+                <mat-icon *ngIf="isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite" color="warn"></mat-icon>
+                <mat-icon *ngIf="!isFavorite(gasStation.id)" aria-hidden="false" fontIcon="favorite_border" color="warn"></mat-icon>
+            </button>
         </div>
+    </div>
+
+    <div class="tab" *ngIf="gasStation">
         <mat-tab-group>
-            <!-- Información General -->
             <mat-tab label="Información General">
-                <div class="p-3">
+                <div class="info">
                     <p><strong>Marca:</strong> {{ gasStation.marca }}</p>
                     <p><strong>Localidad:</strong> {{ gasStation.localidad }}</p>
                     <p><strong>Dirección:</strong> {{ gasStation.direccion }}</p>
@@ -24,18 +30,16 @@
                 </div>
             </mat-tab>
 
-            <!-- Ubicación -->
             <mat-tab label="Ubicación">
-                <div class="p-3">
+                <div class="info">
                     <p><strong>Longitud:</strong> {{ gasStation.longitud }}</p>
                     <p><strong>Latitud:</strong> {{ gasStation.latitud }}</p>
                     <p><strong>Última Actualización:</strong> {{ gasStation.fechadatos }}</p>
                 </div>
             </mat-tab>
 
-            <!-- Precios de Combustible -->
             <mat-tab label="Precios de Combustible">
-                <div class="p-3">
+                <div class="info">
                     <p><strong>Gasolina 95:</strong> {{ gasStation.preciogasolina95 != 0.000 ? gasStation.preciogasolina95 : '-' }} €/L</p>
                     <p><strong>Gasolina 98:</strong> {{ gasStation.preciogasolina98 != 0.000 ? gasStation.preciogasolina98  : '-' }} €/L</p>
                     <p><strong>Diesel:</strong> {{ gasStation.preciodiesel != 0.000 ? gasStation.preciodiesel  : '-' }} €/L</p>
@@ -43,10 +47,11 @@
                 </div>
             </mat-tab>
             <mat-tab label="Valoraciones">
-                <app-valorations [gasStationId]="gasStationId"></app-valorations>
+                <div class="info">
+                    <app-valorations [gasStationId]="gasStationId"></app-valorations>
+                </div>
             </mat-tab>
         </mat-tab-group>
 
-        <a class="btn btn-danger" (click)="goBack()">Volver</a>
     </div>
 </div>

@@ -46,8 +46,8 @@
                 <mat-icon aria-hidden="false" [fontIcon]="hoverStars >= 5 || selectedStars >= 5 ? 'star' : 'star_border'"></mat-icon>
             </button>
         </div>
-        <div class="submitButton">
-            <button mat-raised-button (click)="addValoration(comentarioInput)" [disabled]="comentarioInput.invalid" type="submit">Enviar</button>
+        <div class="divButton">
+            <button class="button" mat-raised-button (click)="addValoration(comentarioInput)" [disabled]="comentarioInput.invalid" type="submit">Enviar</button>
         </div>
     </div>
 </div>

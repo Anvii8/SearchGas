@@ -3,19 +3,65 @@
     max-width: 500px;
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    gap: 10rem;
 }
   
 .search_form_field {
-    width: 100%;
+    width: 260px;
 }
 
-.search_button{
-    width: 50%;
+.group {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+}
+   
+.input {
+    width: 100%;
     height: 40px;
-    margin-bottom: 20px;
-    margin-left: 70px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    color: #0d0c22;
+    transition: .3s ease;
+}
+   
+.input::placeholder {
+    color: #9e9ea7;
+}
+   
+.input:focus, input:hover {
+    outline: none;
+}
+
+.search_button {
+    background-color: #f8a95f;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  
+.search_button:hover {
+    background-color: #FF7A00;
+    box-shadow: 0px 15px 20px rgba(255, 122, 0, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+  
+.search_button:active {
+    transform: translateY(-1px);
 }
 
 .button_geolocation{
@@ -32,22 +78,27 @@
     min-width: 150px;
     max-width: 500px;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 1rem;
     margin-bottom: 2rem;
 }
 
-.row {
+.search_form2,
+.searchTypes {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    flex-direction: row;
 }
 
-.fuel-select {
+.fuelTypes {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    column-gap: 30px;
+}
+
+.part1,
+.part2,
+.searchManual,
+.searchGeo,
+.diesel-selected,
+.petrol-selected{
     flex: 1;
 }
 
@@ -68,13 +119,34 @@ mat-error{
 @media (max-width: 400px){
     .search_form {
         flex-direction: column;
-        justify-content: left;
-        gap: 0;
     }
-    .search_button{
-        width: 50%;
-        height: 40px;
+
+    .search_form_field {
+        width: 100%;
+    }
+
+    .part2,
+    .p2{
+        text-align: center;
+        margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 0;
+    }
+
+    .fuelTypes{
+        align-items: center;
+    }
+
+    .search_form2,
+    .fuelTypes {
+        flex-direction: column;
+    }
+
+    .searchGeo{
+        text-align: right;
+    }
+
+    mat-error{
+        width: 100%;
+        margin-bottom: 20px;
     }
 }

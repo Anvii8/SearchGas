@@ -1,74 +1,82 @@
 <form class="search_form" *ngIf="showNoAuthSection">
-    <mat-form-field class="search_form_field">
-        <mat-label>Inserte una población</mat-label>
-        <input type="text" matInput [formControl]="locationFormControl" placeholder="Ex. Martorell" [matAutocomplete]="locations">
-        <mat-autocomplete #locations="matAutocomplete">
-            <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
-                {{ location }}
-            </mat-option>
-        </mat-autocomplete>
-        <mat-error *ngIf="searchForm.hasError('locationNeeded')">Por favor, inserte una población</mat-error>
-    </mat-form-field>
-
-    <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.hasError('locationNeeded')" (click)="onSubmit()">
-        Buscar
-    </button>
-</form>
-
-<form [formGroup]="searchForm" class="search_form2" *ngIf="showAuthSection">
-    <div class="row">
+    <div>
         <mat-form-field class="search_form_field">
-            <mat-label>Inserte una población</mat-label>
-            <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell" [matAutocomplete]="locations">
+            <div class="group">
+                <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+                <input type="search" matInput [formControl]="locationFormControl" placeholder="Inserte una población" [matAutocomplete]="locations" class="input">
+            </div>
             <mat-autocomplete #locations="matAutocomplete">
                 <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
                     {{ location }}
                 </mat-option>
             </mat-autocomplete>
+            <mat-error *ngIf="searchForm.hasError('locationNeeded')">Por favor, inserte una población</mat-error>
         </mat-form-field>
-        <button (click)="geolocation()" class="button_geolocation"  matTooltip="La ubicación puede no ser precisa" mat-icon-button aria-hidden="false" [ngClass]="{ 'highlighted': geoAccepted }">
-            <mat-icon class="locationIcon" fontIcon="my_location"></mat-icon>
-        </button>
-        <button class="search_button" mat-stroked-button color="primary" [disabled]="searchForm.invalid" (click)="onSubmit()">
+    </div>
+
+    <div class="p2">
+        <button class="search_button" mat-stroked-button [disabled]="searchForm.hasError('locationNeeded')" (click)="onSubmit()">
             Buscar
         </button>
     </div>
-    <mat-error *ngIf="searchForm.hasError('atLeastOneSelectedLocation')">
-        Por favor, inserte una población o escoja la opción de geolocalización.
-    </mat-error>
-    <mat-error *ngIf="searchForm.hasError('bothSelectedLocation')">
-        No puede escoger las dos opciones a la vez. 
-    </mat-error>
+</form>
 
-
-    <h2>Seleccione un tipo de combustible</h2>
-    <div class="row">
-        <div class="fuel-select">
-            <h4>Diesel</h4>
-            <mat-form-field>
-                <mat-label>Diesel</mat-label>
-                <mat-select formControlName="dieselControl" multiple>
-                    <div *ngFor="let diesel of typesDiesel">
-                        <mat-option [value]="diesel">{{ diesel }}</mat-option>
-                    </div>
-                </mat-select>
-            </mat-form-field>
+<form [formGroup]="searchForm" class="search_form2" *ngIf="showAuthSection">
+    <div class="part1">
+        <div class="searchTypes">
+            <div class="searchManual">
+                <mat-form-field class="search_form_field">
+                    <mat-label>Inserte una población</mat-label>
+                    <input type="text" matInput formControlName="locationFormControl" placeholder="Ex. Martorell" [matAutocomplete]="locations">
+                    <mat-autocomplete #locations="matAutocomplete">
+                        <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+                            {{ location }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="searchGeo">
+                <button (click)="geolocation()" class="button_geolocation"  matTooltip="La ubicación puede no ser precisa" mat-icon-button aria-hidden="false" [ngClass]="{ 'highlighted': geoAccepted }">
+                    <mat-icon class="locationIcon" fontIcon="my_location"></mat-icon>
+                </button>
+            </div>
         </div>
-
-        <div class="fuel-select">
-            <h4>Gasolina</h4>
-            <mat-form-field>
-                <mat-label>Gasolina</mat-label>
-                <mat-select formControlName="gasControl" multiple>
-                    <div *ngFor="let gasolina of typesGas">
-                        <mat-option [value]="gasolina">{{ gasolina }}</mat-option>
-                    </div>
-                </mat-select>
-            </mat-form-field>
+        <mat-error *ngIf="searchForm.hasError('atLeastOneSelectedLocation')">Por favor, inserte una población o escoja la opción de geolocalización.</mat-error>
+        <mat-error *ngIf="searchForm.hasError('bothSelectedLocation')">No puede escoger las dos opciones a la vez.</mat-error>
+        
+        <h2>Seleccione un tipo de combustible</h2>
+        <div class="fuelTypes">
+            <div class="diesel-selected">
+                <h4>Diesel</h4>
+                <mat-form-field>
+                    <mat-label>Diesel</mat-label>
+                    <mat-select formControlName="dieselControl" multiple>
+                        <div *ngFor="let diesel of typesDiesel">
+                            <mat-option [value]="diesel">{{ diesel }}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="petrol-selected">
+                <h4>Gasolina</h4>
+                <mat-form-field>
+                    <mat-label>Gasolina</mat-label>
+                    <mat-select formControlName="gasControl" multiple>
+                        <div *ngFor="let gasolina of typesGas">
+                            <mat-option [value]="gasolina">{{ gasolina }}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
+    
+        <mat-error *ngIf="searchForm.hasError('atLeastOneRequired')">Por favor, seleccione al menos un tipo de combustible.</mat-error>
     </div>
 
-    <mat-error *ngIf="searchForm.hasError('atLeastOneRequired')">
-        Por favor, seleccione al menos un tipo de combustible.
-    </mat-error>
+    <div class="part2">
+        <button class="search_button" mat-stroked-button [disabled]="searchForm.invalid" (click)="onSubmit()">
+            Buscar
+        </button>
+    </div>
 </form>

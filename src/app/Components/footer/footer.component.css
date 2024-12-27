@@ -1,6 +1,5 @@
 .home_footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: black;
     color: white;
@@ -8,5 +7,13 @@
 }
 
 .enlace-footer{
+    flex: 1;
     color: white;
+}
+
+@media (max-width: 400px){
+    .home_footer {
+        flex-direction: column;
+        gap: 30px;
+    }
 }

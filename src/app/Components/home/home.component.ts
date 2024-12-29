@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MapComponent } from '../map/map.component';
 import { GasStationDTO } from 'src/app/Models/gas-station.dto';
 import { GeoService } from 'src/app/Services/geo.service';
@@ -16,6 +16,7 @@ export class HomeComponent {
   fuel!: string[];
   geolocation!: [number, number];
   @ViewChild('map') mapComponent!: MapComponent;
+  @ViewChild('endSection') endSection!: ElementRef;
   gasStations: GasStationDTO[] = [];
   isGasStationListVisible: boolean = false;
 
@@ -59,6 +60,9 @@ export class HomeComponent {
       this.mapComponent.updateMapLocation(this.location);
       this.mapComponent.addMapGasStations(this.gasStations);
     }
+    setTimeout(() => {
+      this.endSection.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 0);
   }
 
 }

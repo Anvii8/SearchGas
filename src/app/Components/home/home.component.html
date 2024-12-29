@@ -4,5 +4,7 @@
 </div>
 <div [ngClass]="{ 'container': !isGasStationListVisible, 'vistaColumna': isGasStationListVisible }">
     <app-map #map></app-map>
-    <app-gas-station-list [location]="location" [fuel]="fuel" (gasStationsListReceived)="gasStationsListReceived($event)"></app-gas-station-list>
+    <div #endSection>
+        <app-gas-station-list [location]="location" [fuel]="fuel" (gasStationsListReceived)="gasStationsListReceived($event)"></app-gas-station-list>
+    </div>
 </div>

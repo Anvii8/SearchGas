@@ -32,13 +32,13 @@ export class RegisterComponent {
 
     this.name = new FormControl(this.registerUser.name, [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(25),
     ]);
 
     this.surname = new FormControl(this.registerUser.surname, [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(2),
       Validators.maxLength(25),
     ]);
 

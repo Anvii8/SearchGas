@@ -7,7 +7,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Inserte su Nombre</mat-label>
                     <input matInput type="text" [formControl]="name" required>
-                    <mat-error class="mat-error" *ngIf="name.hasError('minlength') && !name.hasError('required') && !name.hasError('maxlength')">El nombre ha de tener al menos 5 caracteres.</mat-error>
+                    <mat-error class="mat-error" *ngIf="name.hasError('minlength') && !name.hasError('required') && !name.hasError('maxlength')">El nombre ha de tener al menos 2 caracteres.</mat-error>
                     <mat-error class="mat-error" *ngIf="name.hasError('maxlength') && !name.hasError('required')">El nombre no puede contener más de 25 caracteres.</mat-error>
                     <mat-error *ngIf="name.hasError('required')">El nombre es <strong>obligatorio</strong></mat-error>
                 </mat-form-field>
@@ -17,7 +17,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Inserte su Apellido</mat-label>
                     <input matInput type="text" [formControl]="surname" required>
-                    <mat-error class="mat-error" *ngIf="surname.hasError('minlength') && !surname.hasError('required') && !surname.hasError('maxlength')">El apellido ha de tener al menos 5 caracteres.</mat-error>
+                    <mat-error class="mat-error" *ngIf="surname.hasError('minlength') && !surname.hasError('required') && !surname.hasError('maxlength')">El apellido ha de tener al menos 2 caracteres.</mat-error>
                     <mat-error class="mat-error" *ngIf="surname.hasError('maxlength') && !surname.hasError('required')"> El apellido no puede contener más de 25 caracteres.</mat-error>
                     <mat-error *ngIf="surname.hasError('required')">El apellido es <strong>obligatorio</strong></mat-error>
                 </mat-form-field>

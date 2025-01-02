@@ -74,29 +74,15 @@ export class LoginComponent {
         };
         this.headerMenusService.headerManagement.next(headerInfo);
 
-        const showErrorDialog = (title: string, message: string) => {
-          const dialogRef = this.dialog.open(NotificationDialogComponent, {
-            data: {
-              title,
-              message,
-              isSuccess: false
-            },
-            panelClass: ['error-dialog']
-          });
-          setTimeout(() => dialogRef.close(), 3000);
-        };
-        
-        if (error.message === "Unauthorized") {
-          showErrorDialog(
-            'Error en el inicio de sesión',
-            'Las credenciales indicadas no son correctas.'
-          );
-        } else {
-          showErrorDialog(
-            'Error en el inicio de sesión',
-            `Ocurrió un error: ${error.message}`
-          );
-        }
+        const dialogRef = this.dialog.open(NotificationDialogComponent, {
+          data: {
+            title: 'Error en el inicio de sesión',
+            message: 'Las credenciales indicadas no son correctas.',
+            isSuccess: false
+          },
+          panelClass: ['error-dialog'] 
+        });
+        setTimeout(() => dialogRef.close(), 3000);
       }
     );
   }

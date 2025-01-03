@@ -77,17 +77,17 @@
             </ng-container>
     
             <ng-container *ngIf="!isAuthenticated">
-                <!-- Columna Diesel -->
+                <!-- Columna Diésel -->
                 <ng-container matColumnDef="diesel">
-                    <th mat-header-cell *matHeaderCellDef> Diesel (€/L) </th>
+                    <th mat-header-cell *matHeaderCellDef> Diésel (€/L) </th>
                     <td mat-cell *matCellDef="let gasStation">
                         {{ gasStation.preciodiesel != 0.000 ? gasStation.preciodiesel : '-' }}
                     </td>
                 </ng-container>
                 
-                <!-- Columna Diesel Premium -->
+                <!-- Columna Diésel Premium -->
                 <ng-container matColumnDef="dieselPremium">
-                    <th mat-header-cell *matHeaderCellDef> Diesel Premium (€/L) </th>
+                    <th mat-header-cell *matHeaderCellDef> Diésel Premium (€/L) </th>
                     <td mat-cell *matCellDef="let gasStation">
                         {{ gasStation.preciodieselpremium != 0.000 ? gasStation.preciodieselpremium : '-' }}
                     </td>

@@ -32,15 +32,15 @@ export class GasStationListComponent implements OnInit {
   fuelMapping: { [key: string]: string } = {
     "Gasolina 95": "gasolina95",
     "Gasolina 98": "gasolina98",
-    "Diesel": "diesel",
-    "Diesel Premium": "dieselPremium",
+    "Diésel": "diesel",
+    "Diésel Premium": "dieselPremium",
   };
 
   fuelPriceMapping: { [key: string]: string } = {
     "Gasolina 95": "preciogasolina95",
     "Gasolina 98": "preciogasolina98",
-    "Diesel": "preciodiesel",
-    "Diesel Premium": "preciodieselpremium",
+    "Diésel": "preciodiesel",
+    "Diésel Premium": "preciodieselpremium",
   };
 
   constructor(
@@ -68,7 +68,7 @@ export class GasStationListComponent implements OnInit {
         if (data && data.length > 0) {        
           this.userCoordinates = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
           this.location = this.formatLocation(this.location);
-          if(this.location && this.fuel){
+          if(this.location && this.fuel){            
             this.gasStationStateService.setGasStationsState({
               location: this.location,
               fuel: this.fuel
@@ -99,9 +99,6 @@ export class GasStationListComponent implements OnInit {
       (data) => {
         this.isSearched = true;
         this.isLoading = false;
-        /*setTimeout(() => {
-          this.isLoading = false;
-        }, 500);*/
         
         if(data.length === 0){
           this.message = 'No se han encontrado gasolineras en esta población. Por favor, pruebe con otra población.';
@@ -135,9 +132,6 @@ export class GasStationListComponent implements OnInit {
       (data) => {        
         this.isSearched = true;
         this.isLoading = false;
-        /*setTimeout(() => {
-          this.isLoading = false;
-        }, 500);*/
         
         if(data.length === 0){
           this.message = 'No se han encontrado gasolineras en esta población. Por favor, pruebe con otra población y/o seleccione otro tipo de combustible.';

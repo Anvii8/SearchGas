@@ -42,8 +42,8 @@ export class FavoritesComponent {
 
   getFuelPrices(gasStation: GasStationDTO) {    
     return [
-        { type: 'Diesel', price: gasStation.preciodiesel },
-        { type: 'Diesel Premium', price: gasStation.preciodieselpremium },
+        { type: 'Diésel', price: gasStation.preciodiesel },
+        { type: 'Diésel Premium', price: gasStation.preciodieselpremium },
         { type: 'Gasolina 95', price: gasStation.preciogasolina95 },
         { type: 'Gasolina 98', price: gasStation.preciogasolina98 }
     ].filter(fuel => fuel.price != 0.000);

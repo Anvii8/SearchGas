@@ -27,7 +27,7 @@ export class SearchFieldComponent implements OnInit{
   @Output() fuelSelected = new EventEmitter<string[]>();
   @Output() geolocationSelected = new EventEmitter<[number, number]>();
 
-  typesDiesel: string[] = ["Diesel", "Diesel Premium"];
+  typesDiesel: string[] = ["Diésel", "Diésel Premium"];
   typesGas: string[] = ["Gasolina 95", "Gasolina 98"];
 
   searchForm = new FormGroup(
@@ -65,7 +65,7 @@ export class SearchFieldComponent implements OnInit{
             if(savedState){
               this.locationFormControl.setValue(savedState.location);
               if (savedState.fuel && savedState.fuel.length) {
-                const dieselValues = savedState.fuel.filter((fuel: string) => fuel === "Diesel" || fuel === "Diesel Premium");
+                const dieselValues = savedState.fuel.filter((fuel: string) => fuel === "Diésel" || fuel === "Diésel Premium");
                 this.dieselControl.setValue(dieselValues);
               
                 const gasValues = savedState.fuel.filter((fuel: string) => fuel === "Gasolina 95" || fuel === "Gasolina 98");
@@ -114,8 +114,6 @@ export class SearchFieldComponent implements OnInit{
   private atLeastOneSelected(control: AbstractControl): ValidationErrors | null {
     const diesel = control.get('dieselControl')?.value;
     const gas = control.get('gasControl')?.value; 
-    const fuel2: string[] = [...diesel, ...gas];
-
     
     if ((!diesel && !gas) || (diesel.length == 0 && gas.length == 0)) {
         return { atLeastOneRequired: true };
